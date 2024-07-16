@@ -44,7 +44,7 @@ const Update = () => {
             <label htmlFor="option-select-add"></label>
             <select name="options" id="option-select-add" onChange={handleSelectChange}>
               <option value="">--Choisissez un élément--</option>
-              {/* Remplacer les valeurs par des chemins ou des fonctions valides */}
+              
               <option value="/info/create">Une informations</option>
               <option value="/hobbie/create">Un hobbie</option>
               <option value="/skill/create">Une compétence</option>
@@ -56,7 +56,7 @@ const Update = () => {
             <label htmlFor="option-select-list"></label>
             <select name="options" id="option-select-list" onChange={handleSelectChange}>
               <option value="">--Choisissez un élément--</option>
-              {/* Remplacer les valeurs par des chemins ou des fonctions valides */}
+            
               <option value="/infos/list">Liste des informations</option>
               <option value="/hobbies/list">Liste des hobbies</option>
               <option value="/skills/list">Liste des compétences</option>
@@ -124,7 +124,6 @@ const Update = () => {
                       </div>
                     </li>
                   ))}
-
                 </div>
 
                 <div className="w-full px-4">
@@ -169,12 +168,7 @@ const Update = () => {
                       </div>
                     </li>
                   ))}
-
-
                 </div>
-
-
-
               </div>
             </ul>
 

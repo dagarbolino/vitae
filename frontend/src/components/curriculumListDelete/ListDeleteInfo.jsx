@@ -22,8 +22,6 @@ const ListEditDeleteInfo = () => {
   const [editedMotivation, setEditedMotivation] = useState('');
 
 
-
-
   useEffect(() => {
     fetchInfos();
   }, []);

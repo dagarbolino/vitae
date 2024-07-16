@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; // Étape 1
+import { useNavigate } from 'react-router-dom'; 
 
 const CreateHobby = () => {
   const [titleHobby, setTitleHobby] = useState('');
   const [isActive, setIsActive] = useState(false);
   const [curriculumId, setCurriculumId] = useState('');
-  const navigate = useNavigate(); // Étape 2
+  const navigate = useNavigate(); 
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -18,7 +18,7 @@ const CreateHobby = () => {
     .then((response) => {
       console.log(response);
       alert('Hobby ajouté avec succès');
-      navigate(-1); // Étape 3
+      navigate(-1); 
     })
     .catch((error) => {
       console.error(error);
