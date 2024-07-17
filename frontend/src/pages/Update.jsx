@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 import Section from '../components/ui/Section';
+
+
 
 const Update = () => {
   const { id } = useParams();
@@ -11,8 +12,6 @@ const Update = () => {
 
 
   useEffect(() => {
-
-
     const fetchCvData = async () => {
       try {
         const response = await fetch(`http://localhost:8000/curriculum/curriculum/${id}/`);
@@ -26,7 +25,7 @@ const Update = () => {
     fetchCvData();
   }, [id]);
 
-  // Fonction pour gérer le changement de sélection et naviguer
+
   const handleSelectChange = (event) => {
     const path = event.target.value;
     if (path) {
@@ -34,17 +33,26 @@ const Update = () => {
     }
   };
 
+
   return (
     <Section className="w-auto box-border m-0 p-0 flex flex-col justify-start items-center min-h-screen bg-gradient-to-r from-blue-500 to-green-500">
       <NavBar />
-      <div className="flex w-full flex-col justify-center items-center m-4">
+
+      <Link
+        to={`/pdf/${id}`}
+        className='bg-blue-500 text-white p-2 rounded-md m-2 w-auto hover:bg-blue-600 transition-colors duration-300 ease-in-out'>
+        Download
+      </Link>
+
+
+      <div id="cvContent" className="flex w-full flex-col justify-center items-center m-4">
         <div className="flex flex-row-reverse ">
           <div className="bg-gray-100 p-4 rounded-lg flex flex-col h-36 my-20 mx-6">
             <h2 className="font-bold text-xl">Ajouter un élément</h2>
             <label htmlFor="option-select-add"></label>
             <select name="options" id="option-select-add" onChange={handleSelectChange}>
               <option value="">--Choisissez un élément--</option>
-              
+
               <option value="/info/create">Une informations</option>
               <option value="/hobbie/create">Un hobbie</option>
               <option value="/skill/create">Une compétence</option>
@@ -56,7 +64,7 @@ const Update = () => {
             <label htmlFor="option-select-list"></label>
             <select name="options" id="option-select-list" onChange={handleSelectChange}>
               <option value="">--Choisissez un élément--</option>
-            
+
               <option value="/infos/list">Liste des informations</option>
               <option value="/hobbies/list">Liste des hobbies</option>
               <option value="/skills/list">Liste des compétences</option>
@@ -65,6 +73,8 @@ const Update = () => {
               <option value="/formations/list">Liste des formations</option>
             </select>
           </div>
+
+
 
           {cvData ? (
             <ul className="flex flex-col space-y-4 w-full">

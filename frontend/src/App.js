@@ -18,6 +18,7 @@ import ListDeleteSkills from './components/curriculumListDelete/List_Delete_Skil
 import ListDeleteLanguages from './components/curriculumListDelete/List_Delete_Langue';
 import ListDeleteExperiences from './components/curriculumListDelete/List_Delete_Experience';
 import ListDeleteFormations from './components/curriculumListDelete/List_Delete_Formation';
+import FilePdf from './components/generatePDF/FilePdf';
 
 
 
@@ -53,6 +54,10 @@ const App = () => (
         <Route path="/languages/list" element={<ProtectedRoute><ListDeleteLanguages /></ProtectedRoute>} />
         <Route path="/experiences/list" element={<ProtectedRoute><ListDeleteExperiences /></ProtectedRoute>} />
         <Route path="/formations/list" element={<ProtectedRoute><ListDeleteFormations /></ProtectedRoute>} />
+
+
+        <Route path="/pdf/:id" element={<ProtectedRoute><FilePdf /></ProtectedRoute>} />
+
 
 
         
