@@ -37,13 +37,25 @@ const Update = () => {
   return (
     <Section className="w-auto box-border m-0 p-0 flex flex-col justify-start items-center min-h-screen bg-gradient-to-r from-blue-500 to-green-500">
       <NavBar />
+      <div className="flex flex-row justify-center items-center my-6">
+        <Link
+          to={`/pdf/${id}`}
+          className='bg-blue-500 text-white p-2 rounded-md m-2 w-auto hover:bg-blue-600 transition-colors duration-300 ease-in-out'>
+          Download style 1
+        </Link>
 
-      <Link
-        to={`/pdf/${id}`}
-        className='bg-blue-500 text-white p-2 rounded-md m-2 w-auto hover:bg-blue-600 transition-colors duration-300 ease-in-out'>
-        Download
-      </Link>
+        <Link
+          to={`/pdf2/${id}`}
+          className='bg-blue-500 text-white p-2 rounded-md m-2 w-auto hover:bg-blue-600 transition-colors duration-300 ease-in-out'>
+          Download style 2
+        </Link>
 
+        <Link
+          to={`/pdf3/${id}`}
+          className='bg-blue-500 text-white p-2 rounded-md m-2 w-auto hover:bg-blue-600 transition-colors duration-300 ease-in-out'>
+          Download style 3
+        </Link>
+      </div>
 
       <div id="cvContent" className="flex w-full flex-col justify-center items-center m-4">
         <div className="flex flex-row-reverse ">
@@ -112,16 +124,16 @@ const Update = () => {
 
                   <h3 className='text-xl font-semibold underline text-white w-full mt-6'>Hobbies :</h3>
                   {cvData.hobbies && cvData.hobbies.map((hobby, hobbyIndex) => (
-                    <li className='list-inside list-disc text-lg my-2 text-white ' key={hobbyIndex}>
-                      {hobby.title_hobby}
+                    <li className='list-inside  text-lg my-2 text-white ' key={hobbyIndex}>
+                      - {hobby.title_hobby}
                     </li>
                   ))}
 
 
                   <h3 className='text-xl font-semibold underline text-white w-full'>Compétences :</h3>
                   {cvData.skills && cvData.skills.map((skill, skillIndex) => (
-                    <li className='list-inside list-disc text-lg my-2 text-white ' key={skillIndex}>
-                      {skill.title_skill}
+                    <li className='list-inside text-lg my-2 text-white ' key={skillIndex}>
+                      - {skill.title_skill}
                     </li>
                   ))}
 
@@ -136,48 +148,83 @@ const Update = () => {
                   ))}
                 </div>
 
-                <div className="w-full px-4">
+
+
+
+
+
+                <div className="flex flex-col justify-start items-center w-3/4 h-full">
 
                   <div className="border-2 rounded-md my-4  p-4">
                     {cvData.infos && cvData.infos.map((info, infoIndex) => (
-                      <div className='flex flex-col w-full gap-2'>
-                        <p className='text-lg text-white'>{info.motivation}</p>
+                      <div class=" border-2 border-slate-400 rounded-md  p-1 flex flex-col justify-start items-start w-full ">
+                        <p className='px-2 my-2 text-md text-white'>{info.motivation}</p>
                       </div>
                     ))}
                   </div>
 
+                  <div className=" my-4 flex flex-col  w-full">
+                    <h3 className='text-white w-full flex flex-row justify-center items-center text-xl mb-3 font-bold '>Formations :</h3>
+                    <div class='px-3'>
 
-                  <h3 className='text-xl font-semibold underline text-white w-full'>Formations :</h3>
-                  {cvData.formations && cvData.formations.map((formation, formationIndex) => (
-                    <li className='flex flex-col text-lg my-2 text-white border-s-4  ' key={formationIndex}>
-                      <div className="flex flex-row justify-start items-center gap-2  ml-4">
-                        <p>Titre :</p>
-                        <p>{formation.title_formation} </p>
-                      </div>
-                      <div className="flex flex-row justify-start items-center gap-2 ml-4">
-                        <p>Entreprise :</p>
-                        <p>{formation.business}</p>
-                      </div>
-                      <div className="flex flex-row justify-start items-center gap-2 mb-2 ml-4">
-                        <p>Status :</p>
-                        <p className='text-black'>{formation.active ? "Actif" : "Inactif"}</p>
-                      </div>
-                    </li>
-                  ))}
+                      {cvData.formations && cvData.formations.map((formation, formationIndex) => (
+                        <li className='flex flex-col text-lg my-2 text-white border-s-4 mb-6 px-4' key={formationIndex}>
 
-                  <h3 className='text-xl font-semibold underline text-white w-full'>Expériences :</h3>
-                  {cvData.experiences && cvData.experiences.map((experience, experienceIndex) => (
-                    <li className='flex flex-col text-lg my-2 text-white  border-s-4' key={experienceIndex}>
-                      <div className="flex flex-row justify-start items-center gap-2 ml-4 ">
-                        <p>Titre :</p>
-                        <p>{experience.title_experience} </p>
-                      </div>
-                      <div className="flex flex-row justify-start items-center gap-2 mb-2 ml-4">
-                        <p>Entreprise :</p>
-                        <p>{experience.business}</p>
-                      </div>
-                    </li>
-                  ))}
+                          <div className="flex flex-row justify-start">
+                            <p className='flex flex-col justify-start w-full text-lg  mb-4'>
+                              <span>{formationIndex + 1} - {formation.title_formation} </span>
+                            </p>
+                          </div>
+
+                          <div className="flex flex-row justify-start">
+                            <div className="text-md w-auto flex flex-col justify-start items-start mt-1">
+                              <p className='text-sm w-auto mr-3'>{formation.start_date_of_formation}</p>
+                              <p className='text-sm w-auto mr-3'>{formation.end_date_of_formation}</p>
+                            </div>
+
+                            <div className="flex flex-row justify-start">
+                              <div className="text-md w-auto flex flex-col justify-start items-start">
+                                <p>{formation.description_formation}</p>
+                                <p class=' w-auto '>Entreprise: {formation.business} à {formation.location_formation}</p>
+                              </div>
+                            </div>
+                          </div>
+                        </li>
+                      ))}
+                    </div>
+                  </div>
+
+
+                  <div className=" my-4 flex flex-col  w-full">
+                    <h3 className='text-white w-full flex flex-row justify-center items-center text-xl mb-3 font-bold '>Expérience :</h3>
+                    <div class='px-3'>
+
+                      {cvData.experiences && cvData.experiences.map((experience, experienceIndex) => (
+                        <li className='flex flex-col text-lg my-2 text-white border-s-4 mb-6 px-4' key={experienceIndex}>
+
+                          <div className="flex flex-row justify-start">
+                            <p className='flex flex-col justify-start w-full text-lg  mb-4'>
+                              <span>{experienceIndex + 1} - {experience.title_experience} </span>
+                            </p>
+                          </div>
+
+                          <div className="flex flex-row justify-start">
+                            <div className="text-md w-auto flex flex-col justify-start items-start mt-1">
+                              <p className='text-sm w-auto mr-3'>{experience.start_date_of_experience}</p>
+                              <p className='text-sm w-auto mr-3'>{experience.end_date_of_experience}</p>
+                            </div>
+
+                            <div className="flex flex-row justify-start">
+                              <div className="text-md w-auto flex flex-col justify-start items-start">
+                                <p>{experience.description_experience}</p>
+                                <p class=' w-auto '>Entreprise: {experience.business} à {experience.location_experience}</p>
+                              </div>
+                            </div>
+                          </div>
+                        </li>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
             </ul>

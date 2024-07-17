@@ -19,6 +19,8 @@ import ListDeleteLanguages from './components/curriculumListDelete/List_Delete_L
 import ListDeleteExperiences from './components/curriculumListDelete/List_Delete_Experience';
 import ListDeleteFormations from './components/curriculumListDelete/List_Delete_Formation';
 import FilePdf from './components/generatePDF/FilePdf';
+import File2Pdf from './components/generatePDF/File2Pdf';
+import File3Pdf from './components/generatePDF/File3Pdf';
 
 
 
@@ -57,6 +59,8 @@ const App = () => (
 
 
         <Route path="/pdf/:id" element={<ProtectedRoute><FilePdf /></ProtectedRoute>} />
+        <Route path="/pdf2/:id" element={<ProtectedRoute><File2Pdf /></ProtectedRoute>} />
+        <Route path="/pdf3/:id" element={<ProtectedRoute><File3Pdf /></ProtectedRoute>} />
 
 
 
