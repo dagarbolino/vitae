@@ -95,6 +95,7 @@ class CurriculumMixinsView(
 
     def perform_create(self, serializer):
         firstname = self._process_firstname(serializer)
+        
         serializer.save(firstname=firstname)
 
     def perform_update(self, serializer):

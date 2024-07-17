@@ -168,7 +168,7 @@ const Update = () => {
                     <div class='px-3'>
 
                       {cvData.formations && cvData.formations.map((formation, formationIndex) => (
-                        <li className='flex flex-col text-lg my-2 text-white border-s-4 mb-6 px-4' key={formationIndex}>
+                        <li className='flex flex-col text-lg my-2 text-white border-s-2 mb-6 px-4' key={formationIndex}>
 
                           <div className="flex flex-row justify-start">
                             <p className='flex flex-col justify-start w-full text-lg  mb-4'>
@@ -200,7 +200,7 @@ const Update = () => {
                     <div class='px-3'>
 
                       {cvData.experiences && cvData.experiences.map((experience, experienceIndex) => (
-                        <li className='flex flex-col text-lg my-2 text-white border-s-4 mb-6 px-4' key={experienceIndex}>
+                        <li className='flex flex-col text-lg my-2 text-white border-s-2 mb-6 px-4' key={experienceIndex}>
 
                           <div className="flex flex-row justify-start">
                             <p className='flex flex-col justify-start w-full text-lg  mb-4'>
