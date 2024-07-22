@@ -26,17 +26,8 @@ const Dashboard = () => {
               </form>
             </div>
             <CreateCV />
-
-
           </div>
         </dialog>
-
-
-
-
-
-
-
       </div>
 
       <FetchList />

@@ -206,14 +206,14 @@ class SkillViewset(ModelViewSet):
     serializer_class = SkillSerializer
 
     def get_queryset(self):
-        return Skill.objects.filter(active=True)
+        return Skill.objects.all()
 
 
 class LanguageViewset(ModelViewSet):
     serializer_class = LanguageSerializer
 
     def get_queryset(self):
-        return Language.objects.filter(active=True)
+        return Language.objects.all()
 
 
 class FormationViewset(ModelViewSet):

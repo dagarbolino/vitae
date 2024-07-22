@@ -7,7 +7,7 @@ from django.conf import settings
 
 class Curriculum(models.Model):
     title = models.CharField("Titre du curriculum",max_length=120)
-    active = models.BooleanField("curriculum is active?", default=False)
+    active = models.BooleanField("curriculum is active?", default=True)
     created_at = models.DateTimeField("Date de création",auto_now_add=True)
     updated_at = models.DateTimeField("Date de modification",auto_now=True)
     
@@ -44,7 +44,7 @@ class Info(models.Model):
     photo = models.ImageField("photo de la personne", upload_to='photos/', blank=True, null=True)
     motivation = models.TextField("motivation de la personne", blank=True, null=True)
     
-    active = models.BooleanField("curriculum is active?", default=False)
+    active = models.BooleanField("curriculum is active?", default=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
     curriculum = models.ForeignKey(Curriculum, on_delete=models.CASCADE, related_name='info', null=True)
     
@@ -53,14 +53,16 @@ class Info(models.Model):
     
     class Meta:
         verbose_name = "Info"
-        verbose_name_plural = "Infos"      
+        verbose_name_plural = "Infos"  
+        
+    
         
         
         
         
 class Hobby(models.Model):
     title_hobby = models.CharField("titre du hobbie", max_length=120)
-    active = models.BooleanField("curriculum is active?", default=False)
+    active = models.BooleanField("curriculum is active?", default=True)
     
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
     curriculum = models.ForeignKey(Curriculum, on_delete=models.CASCADE, related_name='hobby_info', null=True)
@@ -81,7 +83,7 @@ class Formation(models.Model):
     start_date_of_formation = models.DateField("date de début de la formation", blank=True, null=True)   
     end_date_of_formation = models.DateField("date de fin de la formation", blank=True, null=True)
     location_formation = models.CharField("lieu de la formation", max_length=100)
-    active = models.BooleanField("curriculum is active?", default=False)
+    active = models.BooleanField("curriculum is active?", default=True)
     
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
     curriculum = models.ForeignKey(Curriculum, on_delete=models.CASCADE, related_name='formation_info', null=True)
@@ -103,7 +105,7 @@ class Experience(models.Model):
     start_date_of_experience = models.DateField("date de début de l'expérience", blank=True, null=True)
     end_date_of_experience = models.DateField("date de fin de l'expérience", blank=True, null=True)
     location_experience = models.CharField("lieu de l'expérience", max_length=100)
-    active = models.BooleanField("curriculum is active?", default=False)
+    active = models.BooleanField("curriculum is active?", default=True)
     
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
     Curriculum = models.ForeignKey(Curriculum, on_delete=models.CASCADE, related_name='experience_info', null=True)
@@ -119,7 +121,7 @@ class Experience(models.Model):
 
 class Skill(models.Model):
     title_skill = models.CharField("titre de la compétence", max_length=120)
-    active = models.BooleanField("curriculum is active?", default=False)
+    active = models.BooleanField("curriculum is active?", default=True)
     
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
     Curriculum = models.ForeignKey(Curriculum, on_delete=models.CASCADE, related_name='skill_info', null=True)
@@ -140,7 +142,7 @@ class Language(models.Model):
         ('Avancé', 'Avancé'),
     ]
     niveau_language = models.CharField("niveau de la langue choisie", max_length=120, choices=niveau_choices)
-    active = models.BooleanField("curriculum is active?", default=False)
+    active = models.BooleanField("curriculum is active?", default=True)
     
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
     Curriculum = models.ForeignKey(Curriculum, on_delete=models.CASCADE, related_name='language_info', null=True)

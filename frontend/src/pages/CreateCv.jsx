@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 
 const CreateCv = () => {
   const [title, setTitle] = useState('');
-  const [active, setIsActive] = useState(false);
   const [userId, setUserId] = useState('');
 
   const [infos, setInfos] = useState([]);
@@ -137,7 +136,6 @@ const CreateCv = () => {
     const apiUrl = 'http://localhost:8000/curriculum/curriculum_create/';
     const curriculumData = {
       title,
-      active,
       user: userId,
       infos: selectedInfos,
       skills: selectedSkills,
@@ -177,17 +175,7 @@ const CreateCv = () => {
           />
         </div>
 
-        {/* Champ Actif */}
-        <div className='mb-4'>
-          <label htmlFor='active' className='block text-sm font-medium text-gray-700'>Actif</label>
-          <input
-            type='checkbox'
-            id='active'
-            checked={active}
-            onChange={(e) => setIsActive(e.target.checked)}
-            className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block shadow-sm sm:text-sm border-gray-300 rounded-md'
-          />
-        </div>
+
 
         <div className='mb-4'>
           <label htmlFor='userId' className='block text-sm font-medium text-gray-700'>Identifiant de l'utilisateur</label>

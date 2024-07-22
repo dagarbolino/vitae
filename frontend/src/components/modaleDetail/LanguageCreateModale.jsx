@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 const CreateLangue = () => {
   const [titleLanguage, setTitleLanguage] = useState('');
   const [niveauLanguage, setNiveauLanguage] = useState('');
-  const [isActive, setIsActive] = useState(false);
+
   const [curriculumId, setCurriculumId] = useState('');
   const navigate = useNavigate();
 
@@ -14,7 +14,7 @@ const CreateLangue = () => {
     axios.post('http://localhost:8000/curriculum/languages/', {
       title_language: titleLanguage,
       niveau_language: niveauLanguage,
-      active: isActive,
+     
       curriculum: curriculumId,
     })
     .then((response) => {

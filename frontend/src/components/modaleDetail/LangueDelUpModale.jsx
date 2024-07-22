@@ -8,7 +8,6 @@ const List_Delete_Langue = () => {
   const [editingId, setEditingId] = useState(null);
   const [editedTitle, setEditedTitle] = useState('');
   const [editedLevel, setEditedLevel] = useState('');
-  const [editedActive, setEditedActive] = useState(false);
 
   useEffect(() => {
     fetchLanguages();
@@ -44,11 +43,10 @@ const List_Delete_Langue = () => {
     setEditingId(language.id);
     setEditedTitle(language.title_language);
     setEditedLevel(language.niveau_language);
-    setEditedActive(language.active);
   };
 
   const handleSave = (id) => {
-    handleUpdateLanguage(id, { title_language: editedTitle, niveau_language: editedLevel, active: editedActive });
+    handleUpdateLanguage(id, { title_language: editedTitle, niveau_language: editedLevel});
     setEditingId(null);
   };
 
@@ -86,7 +84,6 @@ const List_Delete_Langue = () => {
                   key={language.id}>
                   {editingId === language.id ? (
                     <>
-
                       <div className="">
                         <div className="">
                           <input

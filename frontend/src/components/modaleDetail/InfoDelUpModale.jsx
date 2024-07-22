@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
 
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
 
 const ListEditDeleteInfo = () => {
   const [infos, setInfos] = useState([]);
@@ -92,70 +92,56 @@ const ListEditDeleteInfo = () => {
 
   return (
 
+    <div className="flex flex-col justify-center items-center gap-10">
       <div className="flex flex-col justify-center items-center gap-10">
-        <div className="flex flex-col justify-center items-center gap-10">
-          <h2 className='text-3xl my-4'>Liste des Infos</h2>
+        <h2 className='text-3xl my-4'>Liste des Infos</h2>
 
-          <div className=' w-full'>
-            {infos.map((info) => (
-              <div
-                className='flex flex-col justify-start items-start my-2'
-                key={info.id}>
-                {editingId === info.id ? (
-                  // Formulaire d'édition pour l'info actuellement en édition
-                  <>
-                    <input className='my-1 w-full text-xl rounded-md p-2 max-w-[500px] border-2' type="text" value={editedLastName} onChange={(e) => setEditedLastName(e.target.value)} />
-                    <input className='my-1 w-full text-xl rounded-md p-2 max-w-[500px] border-2' type="text" value={editedFirstName} onChange={(e) => setEditedFirstName(e.target.value)} />
-                    <input className='my-1 w-full text-xl rounded-md p-2 max-w-[500px] border-2' type="text" value={editedTypeOfContract} onChange={(e) => setEditedTypeOfContract(e.target.value)} />
-                    <input className='my-1 w-full text-xl rounded-md p-2 max-w-[500px] border-2' type="text" value={editedDateOfBirth} onChange={(e) => setEditedDateOfBirth(e.target.value)} />
-                    <input className='my-1 w-full text-xl rounded-md p-2 max-w-[500px] border-2' type="text" value={editedPlaceOfBirth} onChange={(e) => setEditedPlaceOfBirth(e.target.value)} />
-                    <input className='my-1 w-full text-xl rounded-md p-2 max-w-[500px] border-2' type="text" value={editedAddress} onChange={(e) => setEditedAddress(e.target.value)} />
-                    <input className='my-1 w-full text-xl rounded-md p-2 max-w-[500px] border-2' type="text" value={editedCity} onChange={(e) => setEditedCity(e.target.value)} />
-                    <input className='my-1 w-full text-xl rounded-md p-2 max-w-[500px] border-2' type="text" value={editedState} onChange={(e) => setEditedState(e.target.value)} />
-                    <input className='my-1 w-full text-xl rounded-md p-2 max-w-[500px] border-2' type="text" value={editedZipcode} onChange={(e) => setEditedZipcode(e.target.value)} />
-                    <input className='my-1 w-full text-xl rounded-md p-2 max-w-[500px] border-2' type="text" value={editedPhone} onChange={(e) => setEditedPhone(e.target.value)} />
-                    <input className='my-1 w-full text-xl rounded-md p-2 max-w-[500px] border-2' type="text" value={editedEmail} onChange={(e) => setEditedEmail(e.target.value)} />
-                    <textarea className='my-2 w-full text-xl h-32 rounded-md p-2 max-w-[500px]' value={editedMotivation} onChange={(e) => setEditedMotivation(e.target.value)} />
+        <div className=' w-[450px]'>
+          {infos.map((info) => (
+            <div
+              className='flex flex-col justify-start items-start my-2'
+              key={info.id}>
+              {editingId === info.id ? (
+                // Formulaire d'édition pour l'info actuellement en édition
+                <>
+                  <input className='my-1 w-full text-xl rounded-md p-2 max-w-[500px] border-2' type="text" value={editedLastName} onChange={(e) => setEditedLastName(e.target.value)} />
+                  <input className='my-1 w-full text-xl rounded-md p-2 max-w-[500px] border-2' type="text" value={editedFirstName} onChange={(e) => setEditedFirstName(e.target.value)} />
+                  <input className='my-1 w-full text-xl rounded-md p-2 max-w-[500px] border-2' type="text" value={editedTypeOfContract} onChange={(e) => setEditedTypeOfContract(e.target.value)} />
+                  <input className='my-1 w-full text-xl rounded-md p-2 max-w-[500px] border-2' type="text" value={editedDateOfBirth} onChange={(e) => setEditedDateOfBirth(e.target.value)} />
+                  <input className='my-1 w-full text-xl rounded-md p-2 max-w-[500px] border-2' type="text" value={editedPlaceOfBirth} onChange={(e) => setEditedPlaceOfBirth(e.target.value)} />
+                  <input className='my-1 w-full text-xl rounded-md p-2 max-w-[500px] border-2' type="text" value={editedAddress} onChange={(e) => setEditedAddress(e.target.value)} />
+                  <input className='my-1 w-full text-xl rounded-md p-2 max-w-[500px] border-2' type="text" value={editedCity} onChange={(e) => setEditedCity(e.target.value)} />
+                  <input className='my-1 w-full text-xl rounded-md p-2 max-w-[500px] border-2' type="text" value={editedState} onChange={(e) => setEditedState(e.target.value)} />
+                  <input className='my-1 w-full text-xl rounded-md p-2 max-w-[500px] border-2' type="text" value={editedZipcode} onChange={(e) => setEditedZipcode(e.target.value)} />
+                  <input className='my-1 w-full text-xl rounded-md p-2 max-w-[500px] border-2' type="text" value={editedPhone} onChange={(e) => setEditedPhone(e.target.value)} />
+                  <input className='my-1 w-full text-xl rounded-md p-2 max-w-[500px] border-2' type="text" value={editedEmail} onChange={(e) => setEditedEmail(e.target.value)} />
+                  <textarea className='my-2 w-full  text-xl h-48 rounded-md p-2 max-w-[500px] border-2' value={editedMotivation} onChange={(e) => setEditedMotivation(e.target.value)} />
 
-                    <button
-                      className='bg-green-500 text-xl text-white px-2 py-1 rounded-md hover:bg-green-700 transition-colors'
-                      onClick={() => handleSave(info.id)}>Sauvegarder</button>
-                  </>
-                ) : (
-                  // Affichage des informations
-                  <>
-                    <div className="flex flex-row  border-4">
+                  <button
+                    className='bg-green-500 text-xl text-white px-2 py-1 rounded-md hover:bg-green-700 transition-colors'
+                    onClick={() => handleSave(info.id)}>Sauvegarder</button>
+                </>
+              ) : (
+                // Affichage des informations
+                <>
+                  <div className="flex flex-col w-[450px] rounded-md border-4">
 
-                      <div className="flex flex-col justify-start items-start p-4 gap-2">
-                        <div className='flex flex-row justify-start items-start gap-2 text-xl'><p className=' font-semibold '>Nom : </p>{info.lastname} </div>
-                        <div className='flex flex-row justify-start items-start gap-2 text-xl'><p className=' font-semibold '>Prénom : </p>{info.firstname}</div>
-                        <div className='flex flex-row justify-start items-start gap-2 text-xl'><p className=' font-semibold '>Type de contrat : </p>{info.type_of_contract}</div>
-                        <div className='flex flex-row justify-start items-start gap-2 text-xl'><p className=' font-semibold '>Date de naissance : </p>{info.date_of_birth}</div>
-                        <div className='flex flex-row justify-start items-start gap-2 text-xl'><p className=' font-semibold '>Lieu de naissance : </p>{info.place_of_birth}</div>
-                        <div className='flex flex-row justify-start items-start gap-2 text-xl'><p className=' font-semibold '>Adresse : </p>{info.address}</div>
-                        <div className='flex flex-row justify-start items-start gap-2 text-xl'><p className=' font-semibold '>Ville : </p>{info.city}</div>
-                        <div className='flex flex-row justify-start items-start gap-2 text-xl'><p className=' font-semibold '>Etat : </p>{info.state}</div>
-                        <div className='flex flex-row justify-start items-start gap-2 text-xl'><p className=' font-semibold '>Code postal : </p>{info.zipcode}</div>
-                        <div className='flex flex-row justify-start items-start gap-2 text-xl'><p className=' font-semibold '>Téléphone : </p>{info.phone}</div>
-                        <div className='flex flex-row justify-start items-start gap-2 text-xl'><p className=' font-semibold '>Email : </p>{info.email}</div>
-
-
-                        <div className='flex flex-row justify-start items-start gap-2 text-xl'><p className=' font-semibold '>Motivation: </p>{info.motivation}</div>
-
-
-                      </div>
-                      <div className="">
-                        <button className='w-28 rounded-md bg-blue-300 hover:bg-blue-400 transition duration-500 my-2' onClick={() => handleEditClick(info)}>Éditer</button>
-                        <button className='w-28 rounded-md bg-red-500 hover:bg-red-600 taransition duration-500' onClick={() => deleteInfo(info.id)}>Supprimer</button>
-                      </div>
+                    <div className="flex flex-col justify-start items-start p-4 gap-2">
+                      <div className='my-1 w-full text-xl rounded-md p-2 max-w-[500px] border-2 flex flex-row gap-4'><p className=' font-semibold '>Nom : </p>{info.lastname} </div>
+                      <div className='my-1 w-full text-xl rounded-md p-2 max-w-[500px] border-2 flex flex-row gap-4'><p className=' font-semibold '>Prénom : </p>{info.firstname}</div>
                     </div>
-                  </>
-                )}
-              </div>
-            ))}
-          </div>
+                    <div className="flex flex-row justify-center items-center w-full gap-2">
+                      <button className='w-28 rounded-md bg-blue-300 hover:bg-blue-400 transition duration-500 my-2' onClick={() => handleEditClick(info)}>Éditer</button>
+                      <button className='w-28 rounded-md bg-red-500 hover:bg-red-600 taransition duration-500' onClick={() => deleteInfo(info.id)}>Supprimer</button>
+                    </div>
+                  </div>
+                </>
+              )}
+            </div>
+          ))}
         </div>
       </div>
+    </div>
 
   );
 };

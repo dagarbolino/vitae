@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 import Section from '../components/ui/Section';
 
@@ -21,7 +21,7 @@ import SkillDelUpModale from '../components/modaleDetail/SkillDelUpModale';
 const Detail = () => {
   const { id } = useParams();
   const [cvData, setCvData] = useState(null);
-  const navigate = useNavigate();
+
 
 
   useEffect(() => {
@@ -39,12 +39,7 @@ const Detail = () => {
   }, [id]);
 
 
-  const handleSelectChange = (event) => {
-    const path = event.target.value;
-    if (path) {
-      navigate(path);
-    }
-  };
+
 
 
   return (
@@ -71,43 +66,17 @@ const Detail = () => {
       </div>
 
       <div id="cvContent" className="flex w-full flex-col justify-center items-center m-4">
-        <div className="flex flex-row-reverse ">
-          <div className="bg-gray-100 p-4 rounded-lg flex flex-col h-44 my-20 mx-6">
-            <h2 className="font-bold text-xl">Créer un élément</h2>
-            <label htmlFor="option-select-add"></label>
-            <select name="options" id="option-select-add" onChange={handleSelectChange}>
-              <option value="">--Choisissez un élément--</option>
-
-              <option value="/info/create">Une informations</option>
-              <option value="/hobbie/create">Un hobbie</option>
-              <option value="/skill/create">Une compétence</option>
-              <option value="/language/create">Une langue</option>
-              <option value="/formation/create">Une formation</option>
-              <option value="/experience/create">Une expérience</option>
-            </select>
-            <h2 className="font-bold text-xl">Modifier Supprimer des éléments</h2>
-            <label htmlFor="option-select-list"></label>
-            <select name="options" id="option-select-list" onChange={handleSelectChange}>
-              <option value="">--Choisissez un élément--</option>
-
-              <option value="/infos/list">Liste des informations</option>
-              <option value="/hobbies/list">Liste des hobbies</option>
-              <option value="/skills/list">Liste des compétences</option>
-              <option value="/languages/list">Liste des langues</option>
-              <option value="/experiences/list">Liste des expériences</option>
-              <option value="/formations/list">Liste des formations</option>
-            </select>
-          </div>
-
+        <div className="flex flex-row ">
+          
 
 
           {cvData ? (
             <ul className="flex flex-col space-y-4 w-full">
-              <h1 className='text-3xl text-white'>Détail de votre curriculum vitae :
-
+              <h1 className='text-3xl text-white my-10'>Détail de votre curriculum vitae :
+              <span className='mx-6 px-2 text-4xl border-2 rounded-md'>{cvData.title}</span>
                 <Link to={`/update/${id}`}
-                  className='bg-blue-500 text-white p-2 rounded-md m-2 w-auto hover:bg-blue-600 transition-colors duration-300 ease-in-out'>
-                  <span className='mx-6 px-2  border-2 rounded-md'>{cvData.title} - update</span>
+                  className=' text-white p-2 rounded-md m-2 w-auto hover:bg-blue-600 transition-colors duration-300 ease-in-out'>
+                  <span className='mx-6 px-2 bg-blue-500 border-2 rounded-md'> Modifier</span>
                 </Link>
 
               </h1>
@@ -168,15 +137,6 @@ const Detail = () => {
 
                         </div>
                       </dialog>
-
-
-
-
-
-
-
-
-
 
 
                       <p className='text-2xl text-white'>{info.lastname}</p>

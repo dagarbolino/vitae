@@ -6,13 +6,11 @@ class InfoSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Info
-        fields = ['id', 'user', 'active', 'lastname', 'firstname', 'type_of_contract', 'date_of_birth', 'place_of_birth', 'address', 'city', 'state', 'zipcode', 'phone', 'email', 'photo', 'motivation']
+        fields = ['id', 'user', 'lastname', 'firstname', 'type_of_contract', 'date_of_birth', 'place_of_birth', 'address', 'city', 'state', 'zipcode', 'phone', 'email', 'photo', 'motivation']
         
     def validate_lastname(self, value):
         if not value:
             raise serializers.ValidationError("The lastname field cannot be empty.")
-        if Info.objects.filter(lastname=value).exists():
-            raise serializers.ValidationError("This lastname already exists")
         return value
 
 class HobbySerializer(serializers.ModelSerializer):
@@ -23,8 +21,6 @@ class HobbySerializer(serializers.ModelSerializer):
     def validate_title_hobby(self, value):
         if not value: 
             raise serializers.ValidationError("The title_hobby field cannot be empty.")
-        if Hobby.objects.filter(title_hobby=value).exists():
-            raise serializers.ValidationError("This title already exists")
         return value
         
 
@@ -36,47 +32,40 @@ class SkillSerializer(serializers.ModelSerializer):
     def validate_title_skill(self, value):
         if not value:
             raise serializers.ValidationError("The title_skill field cannot be empty.")
-        if Skill.objects.filter(title_skill=value).exists():
-            raise serializers.ValidationError("This title already exists")
         return value    
         
         
 class LanguageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Language
-        fields = ['id', 'active', 'title_language', 'niveau_language']  
+        fields = ['id', 'title_language', 'niveau_language']  
         
     def validate_title_language(self, value):
         if not value:
             raise serializers.ValidationError("The title_language field cannot be empty.")
-        if Language.objects.filter(title_language=value).exists():
-            raise serializers.ValidationError("This title already exists")
+        
         return value   
         
         
 class FormationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Formation
-        fields = ['id', 'active', 'title_formation', 'description_formation', 'business', 'start_date_of_formation', 'end_date_of_formation', 'location_formation']
+        fields = ['id', 'title_formation', 'description_formation', 'business', 'start_date_of_formation', 'end_date_of_formation', 'location_formation']
     
     def validate_title_formation(self, value):
         if not value:
             raise serializers.ValidationError("The title_formation field cannot be empty.")
-        if Formation.objects.filter(title_formation=value).exists():
-            raise serializers.ValidationError("This title already exists")
         return value   
         
         
 class ExperienceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Experience
-        fields = ['id', 'active', 'title_experience', 'description_experience', 'business', 'start_date_of_experience', 'end_date_of_experience', 'location_experience']  
+        fields = ['id', 'title_experience', 'description_experience', 'business', 'start_date_of_experience', 'end_date_of_experience', 'location_experience']  
         
     def validate_title_experience(self, value):
         if not value:
             raise serializers.ValidationError("The title_experience field cannot be empty.")
-        if Experience.objects.filter(title_experience=value).exists():
-            raise serializers.ValidationError("This title already exists")
         return value    
         
                 
