@@ -173,7 +173,7 @@ const CreateCv = () => {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             required
-            className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
+            className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm  border-2 border-gray-300 rounded-md'
           />
         </div>
 
@@ -197,16 +197,18 @@ const CreateCv = () => {
             value={userId}
             onChange={(e) => setUserId(e.target.value)}
             required
-            className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
+            className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-2 rounded-md border-gray-300 rounded-md'
           />
         </div>
 
         {/* Liste des informations */}
         <div className='mb-4'>
           <fieldset>
-            <legend>Informations</legend>
+            <legend className='text-lg font-semibold'>Informations</legend>
             {infos.map(info => (
-              <div key={info.id}>
+              <div 
+              className='flex flex-row justify-start items-center gap-2'
+              key={info.id}>
                 <input
                   type="checkbox"
                   id={`info-${info.id}`}
@@ -223,9 +225,11 @@ const CreateCv = () => {
 
         <div className='mb-4'>
           <fieldset>
-            <legend>Loisirs</legend>
+            <legend className='text-lg font-semibold'>Loisirs</legend>
             {hobbies.map(hobby => (
-              <div key={hobby.id}>
+              <div 
+              className='flex flex-row justify-start items-center gap-2'
+              key={hobby.id}>
                 <input
                   type="checkbox"
                   id={`hobby-${hobby.id}`}
@@ -241,9 +245,11 @@ const CreateCv = () => {
 
         <div className='mb-4'>
           <fieldset>
-            <legend>Compétences</legend>
+            <legend className='text-lg font-semibold'>Compétences</legend>
             {skills.map(skill => (
-              <div key={skill.id}>
+              <div 
+              className='flex flex-row justify-start items-center gap-2'
+              key={skill.id}>
                 <input
                   type="checkbox"
                   id={`skill-${skill.id}`}
@@ -258,9 +264,11 @@ const CreateCv = () => {
 
         <div className='mb-4'>
           <fieldset>
-            <legend>Langues</legend>
+            <legend className='text-lg font-semibold'>Langues</legend>
             {languages.map(language => (
-              <div key={language.id}>
+              <div 
+              className='flex flex-row justify-start items-center gap-2'
+              key={language.id}>
                 <input
                   type="checkbox"
                   id={`language-${language.id}`}
@@ -276,9 +284,11 @@ const CreateCv = () => {
 
         <div className='mb-4'>
           <fieldset>
-            <legend>Formations</legend>
+            <legend className='text-lg font-semibold'>Formations</legend>
             {formations.map(formation => (
-              <div key={formation.id}>
+              <div
+              className='flex flex-row justify-start items-center gap-2'
+              key={formation.id}>
                 <input
                   type="checkbox"
                   id={`formation-${formation.id}`}
@@ -294,9 +304,11 @@ const CreateCv = () => {
 
         <div className='mb-4'>
           <fieldset>
-            <legend>Expériences</legend>
+            <legend className='text-lg font-semibold'>Expériences</legend>
             {experiences.map(experience => (
-              <div key={experience.id}>
+              <div 
+              className='flex flex-row justify-start items-center gap-2'
+              key={experience.id}>
                 <input
                   type="checkbox"
                   id={`experience-${experience.id}`}

@@ -51,6 +51,13 @@ const App = () => (
 
 
         <Route path="/info/list/:id" element={<ProtectedRoute><ListDeleteInfo/></ProtectedRoute>} />
+        <Route path="/hobbies/list/:id" element={<ProtectedRoute><ListDeleteHobby/></ProtectedRoute>} />
+        <Route path="/skills/list/:id" element={<ProtectedRoute><ListDeleteSkills/></ProtectedRoute>} />
+        <Route path="/languages/list/:id" element={<ProtectedRoute><ListDeleteLanguages/></ProtectedRoute>} />
+        <Route path="/formations/list/:id" element={<ProtectedRoute><ListDeleteFormations/></ProtectedRoute>} />
+        <Route path="/experiences/list/:id" element={<ProtectedRoute><ListDeleteExperiences/></ProtectedRoute>} />
+        
+        
         <Route path='/update/:id' element={<ProtectedRoute><UpdateCv /></ProtectedRoute>} /> 
 
         <Route path="/hobbies/list" element={<ProtectedRoute><ListDeleteHobby/></ProtectedRoute>} />
