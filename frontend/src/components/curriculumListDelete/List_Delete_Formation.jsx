@@ -98,7 +98,7 @@ const List_Delete_Formation = () => {
           {/* Modifier une formation */}
           <h2 className='text-2xl my-4'>Modifier une formation</h2>
           <div className='border-2 rounded-md p-4 w-96'>
-            
+
             <ul>
               {formations.map(formation => (
                 <li

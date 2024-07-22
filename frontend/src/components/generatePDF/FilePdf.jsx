@@ -5,37 +5,41 @@ import { useParams } from 'react-router-dom';
 import Section from '../../components/ui/Section';
 
 
+
+
 const FilePdf = () => {
+  // Utilisation des hooks pour gérer l'état local
   const { id } = useParams();
   const [cvData, setCvData] = useState(null);
   const [backgroundColor, setBackgroundColor] = useState('white');
   const [fontFamily, setFontFamily] = useState('Arial');
   const [colorText, setColorText] = useState('black');
 
+  // Fonction pour changer la couleur du texte
   const changeColorText = () => {
     const colors = ['black', 'blue', 'green', 'yellow', 'pink'];
-
     const currentColorIndex = colors.indexOf(colorText);
     const newColorIndex = (currentColorIndex + 1) % colors.length;
     setColorText(colors[newColorIndex]);
   };
 
+  // Fonction pour changer la couleur de fond
   const changeBackgroundColor = () => {
     const colors = ['white', 'lightblue', 'lightgreen', 'lightyellow', 'lightpink'];
-
     const currentColorIndex = colors.indexOf(backgroundColor);
     const newColorIndex = (currentColorIndex + 1) % colors.length;
     setBackgroundColor(colors[newColorIndex]);
   };
 
+  // Fonction pour changer la famille de polices
   const changeFontFamily = () => {
     const fonts = ['Arial', 'Verdana', 'Times New Roman', 'Courier New', 'Georgia'];
-
     const currentFontIndex = fonts.indexOf(fontFamily);
     const newFontIndex = (currentFontIndex + 1) % fonts.length;
     setFontFamily(fonts[newFontIndex]);
   };
 
+  // Récupération des données du CV à partir d'une API
   useEffect(() => {
     const fetchCvData = async () => {
       try {
@@ -50,10 +54,10 @@ const FilePdf = () => {
     fetchCvData();
   }, [id]);
 
+  // Fonction pour générer le PDF
   const generatePDF = () => {
     const cvContentElement = document.querySelector("#cvContent");
     const originalBackgroundColor = cvContentElement.style.backgroundColor; 
-
     cvContentElement.style.backgroundColor = backgroundColor;
 
     const images = document.querySelectorAll("#cvContent img");
@@ -84,30 +88,29 @@ const FilePdf = () => {
     });
   };
 
+  // Rendu du composant
   return (
     <>
-    <Section>
-      <div className="" style={{ color: colorText }}>
-        <button onClick={generatePDF} className='bg-blue-500 p-2 rounded-md m-2 w-auto hover:bg-blue-600 transition-colors duration-300 ease-in-out'>
-          Générer PDF
-        </button>
-      </div>
+      <Section>
+        <div style={{ color: colorText }}>
+          <button onClick={generatePDF} className='bg-blue-500 p-2 rounded-md m-2 w-auto hover:bg-blue-600 transition-colors duration-300 ease-in-out'>
+            Générer PDF
+          </button>
+        </div>
 
-      <div style={{ backgroundColor: backgroundColor, fontFamily: fontFamily, color: colorText }}> 
-        <button
-          className='p-2 rounded-md m-2 w-auto h-full bg-blue-400 hover:bg-blue-600 transition-colors duration-300 ease-in-out'
-          onClick={changeBackgroundColor}>Changer la couleur de fond</button>
+        <div style={{ backgroundColor: backgroundColor, fontFamily: fontFamily, color: colorText }}> 
+          <button
+            className='p-2 rounded-md m-2 w-auto h-full bg-blue-400 hover:bg-blue-600 transition-colors duration-300 ease-in-out'
+            onClick={changeBackgroundColor}>Changer la couleur de fond</button>
 
-        <button
-          className='p-2 rounded-md m-2 w-auto bg-blue-400 hover:bg-blue-600 transition-colors duration-300 ease-in-out'
-          onClick={changeFontFamily}>Changer la police</button>
+          <button
+            className='p-2 rounded-md m-2 w-auto bg-blue-400 hover:bg-blue-600 transition-colors duration-300 ease-in-out'
+            onClick={changeFontFamily}>Changer la police</button>
 
-        <button 
-          className='p-2 rounded-md m-2 w-auto bg-blue-400 hover:bg-blue-600 transition-colors duration-300 ease-in-out'
-          onClick={changeColorText}>Changer la couleur du texte</button> 
-
-
-          <div id="cvContent" className="flex w-full flex-col justify-center items-center m-4  h-[1448px] max-w-[1024px]">
+          <button 
+            className='p-2 rounded-md m-2 w-auto bg-blue-400 hover:bg-blue-600 transition-colors duration-300 ease-in-out'
+            onClick={changeColorText}>Changer la couleur du texte</button> 
+          <div id="cvContent" className="flex w-full flex-col justify-start items-center m-4  h-[1448px] max-w-[1024px]">
             <div className="flex flex-row h-full">
               {cvData ? (
                 <ul className="flex flex-col space-y-4 w-full">

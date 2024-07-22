@@ -81,7 +81,7 @@ const List_Delete_Hobby = () => {
           {/* Modifier un hobby */}
           <h2 className='text-2xl my-4'>Modifier un hobby</h2>
           <div className='border-2 rounded-md p-4 w-96'>
-            
+
             <ul>
               {hobbies.map(hobby => (
                 <li
@@ -129,7 +129,7 @@ const List_Delete_Hobby = () => {
           </div>
         </div>
       </div>
-   
+
     </Section>
   );
 };

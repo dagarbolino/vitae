@@ -9,7 +9,7 @@ class CurriculumAdmin(admin.ModelAdmin):
     
 
 class InfoAdmin(admin.ModelAdmin):
-    list_display = ['lastname', 'active', 'firstname', 'type_of_contract', 'date_of_birth', 'place_of_birth', 'address', 'city', 'state', 'zipcode', 'phone', 'email', 'photo', 'motivation']
+    list_display = ['id', 'lastname', 'active', 'firstname', 'type_of_contract', 'date_of_birth', 'place_of_birth', 'address', 'city', 'state', 'zipcode', 'phone', 'email', 'photo', 'motivation']
     
 
 class HobbyAdmin(admin.ModelAdmin):

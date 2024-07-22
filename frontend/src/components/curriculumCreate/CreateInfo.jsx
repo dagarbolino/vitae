@@ -17,7 +17,6 @@ const CreateInfo = () => {
   const [photo, setPhoto] = useState(null);
   const [motivation, setMotivation] = useState('');
   const [active, setActive] = useState(false);
-  const [curriculumId, setCurriculumId] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -37,7 +36,6 @@ const CreateInfo = () => {
     if (photo) formData.append('photo', photo);
     formData.append('motivation', motivation);
     formData.append('active', active);
-    formData.append('curriculum', curriculumId);
 
     axios.post('http://localhost:8000/info/', formData, {
       headers: {
@@ -234,17 +232,7 @@ const CreateInfo = () => {
           </select>
         </div>
 
-        <div className='mb-4'>
-          <label htmlFor='curriculumId' className='block text-sm font-medium text-gray-700'>Curriculum</label>
-          <input
-            type='text'
-            id='curriculumId'
-            value={curriculumId}
-            onChange={(e) => setCurriculumId(e.target.value)}
-            className='mt-1 block w-full rounded-md border-gray-300 shadow-sm'
-            required
-          />
-        </div>
+
 
         <div className='mb-4'>
         <button type='submit' className='px-4 py-2 bg-blue-500 text-white rounded-md'>Ajouter</button>

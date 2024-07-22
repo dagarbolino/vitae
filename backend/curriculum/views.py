@@ -1,17 +1,19 @@
 from django.forms.models import model_to_dict
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404
-from rest_framework import authentication, generics, mixins, permissions
+from rest_framework import (authentication, generics, mixins, permissions,
+                            status, viewsets)
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.viewsets import ModelViewSet
-from rest_framework.viewsets import ReadOnlyModelViewSet
+from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
 
-from .models import Curriculum, Experience, Formation, Hobby, Info, Language, Skill
-from .serializer import CurriculumSerializer, ExperienceSerializer, FormationSerializer, HobbySerializer, InfoSerializer, LanguageSerializer, SkillSerializer
-from rest_framework import viewsets
-
+from .models import (Curriculum, Experience, Formation, Hobby, Info, Language,
+                     Skill)
+from .serializer import (CurriculumCretateSerializer, CurriculumSerializer,
+                         ExperienceSerializer, FormationSerializer,
+                         HobbySerializer, InfoSerializer, LanguageSerializer,
+                         SkillSerializer)
 
 
 class DetailCurriculumView(generics.RetrieveAPIView):
@@ -20,7 +22,7 @@ class DetailCurriculumView(generics.RetrieveAPIView):
 
 
 class ListCreateCurriculumView(generics.ListCreateAPIView):
-
+    queryset = Curriculum.objects.all()
     serializer_class = CurriculumSerializer
 
     authentication_classes = [authentication.SessionAuthentication]
@@ -44,6 +46,18 @@ class ListCreateCurriculumView(generics.ListCreateAPIView):
 
     def get_queryset(self):
         return Curriculum.objects.filter(user=self.request.user)
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+
+        data = self.request.data
+        serializer = CurriculumSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors)
 
 
 class UpdateCurriculumView(generics.UpdateAPIView):
@@ -75,8 +89,6 @@ class DeleteCurriculumView(generics.DestroyAPIView):
 # -----------------------------------------------------------
 
 
-
-
 class CurriculumMixinsView(
         generics.GenericAPIView,
         mixins.ListModelMixin,
@@ -95,7 +107,6 @@ class CurriculumMixinsView(
 
     def perform_create(self, serializer):
         firstname = self._process_firstname(serializer)
-        
         serializer.save(firstname=firstname)
 
     def perform_update(self, serializer):
@@ -119,24 +130,24 @@ class CurriculumMixinsView(
 
     def patch(self, request, *args, **kwargs):
         return self.partial_update(request, *args, **kwargs)
-    
-    
+
+
 # -------------------------------------------------------------------------
-    
-    
-    
+
+
 class HobbyAPIView(APIView):
     def get(self, *args, **kwargs):
         hobbies = Hobby.objects.all()
         serializer = HobbySerializer(hobbies, many=True)
         return Response(serializer.data)
-    
+
+
 class CurriculumAPIView(APIView):
     def get(self, *args, **kwargs):
         curriculum = Curriculum.objects.all()
         serializer = CurriculumSerializer(curriculum, many=True)
         return Response(serializer.data)
-    
+
     def post(self, *args, **kwargs):
         data = self.request.data
         serializer = CurriculumSerializer(data=data)
@@ -144,59 +155,79 @@ class CurriculumAPIView(APIView):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors)
-    
-    
-class CurriculumViewSet(ReadOnlyModelViewSet):
-    serializer_class = CurriculumSerializer
-    
-    def get_queryset(self):
-        return Curriculum.objects.filter(active=True)   
-    
 
-    
+
+class CurriculumViewSet(ModelViewSet):
+    serializer_class = CurriculumSerializer
+
+    def get_queryset(self):
+        return Curriculum.objects.all()
+
+    def create(self, request, *args, **kwargs):
+        data = request.data
+        serializer = CurriculumSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors)
+
+
+class CurriculumCreateViewSet(ModelViewSet):
+    serializer_class = CurriculumCretateSerializer
+
+    def get_queryset(self):
+        return Curriculum.objects.all()
+
+    def create(self, request, *args, **kwargs):
+        data = request.data
+        serializer = CurriculumCretateSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors)
+
+
 class InfoViewset(ModelViewSet):
     serializer_class = InfoSerializer
-    
+
     def get_queryset(self):
-        return Info.objects.filter(active=True) 
-    
-    
+        return Info.objects.filter(active=True)
+
 
 class HobbyViewSet(ModelViewSet):
     queryset = Hobby.objects.all()
     serializer_class = HobbySerializer
-    
+
     def get_queryset(self):
         return Hobby.objects.all()
-    
 
 
 class SkillViewset(ModelViewSet):
     serializer_class = SkillSerializer
-    
+
     def get_queryset(self):
-        return Skill.objects.filter(active=True)  
-    
-    
+        return Skill.objects.filter(active=True)
+
+
 class LanguageViewset(ModelViewSet):
     serializer_class = LanguageSerializer
-    
+
     def get_queryset(self):
-        return Language.objects.filter(active=True)          
+        return Language.objects.filter(active=True)
 
 
 class FormationViewset(ModelViewSet):
     serializer_class = FormationSerializer
-    
+
     def get_queryset(self):
-        return Formation.objects.filter(active=True)  
-    
+        return Formation.objects.filter(active=True)
+
 
 class ExperienceViewset(ModelViewSet):
     serializer_class = ExperienceSerializer
-    
+
     def get_queryset(self):
-        return Experience.objects.filter(active=True)  
+        return Experience.objects.filter(active=True)
 
 
 # -----------------------------------------------------------

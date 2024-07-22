@@ -5,7 +5,7 @@ import Section from '../components/ui/Section';
 
 
 
-const Update = () => {
+const Detail = () => {
   const { id } = useParams();
   const [cvData, setCvData] = useState(null);
   const navigate = useNavigate();
@@ -91,13 +91,27 @@ const Update = () => {
           {cvData ? (
             <ul className="flex flex-col space-y-4 w-full">
               <h1 className='text-3xl text-white'>Détail de votre curriculum vitae :
-                <span className='mx-6 px-2  border-2 rounded-md'>{cvData.title}</span>
+
+                <Link to={`/update/${id}`} className='bg-blue-500 text-white p-2 rounded-md m-2 w-auto hover:bg-blue-600 transition-colors duration-300 ease-in-out'>
+                  <span className='mx-6 px-2  border-2 rounded-md'>{cvData.title} - update</span>
+                </Link>
+
               </h1>
               <div className="flex flex-row gap-6 mt-6 max-w-[1024px] bg-slate-400 ">
 
+
                 <div className="my-2 w-1/4 p-4">
+
+
+
                   {cvData.infos && cvData.infos.map((info, infoIndex) => (
+
                     <div className='flex flex-col w-full gap-2'>
+
+                      <Link to={`/info/list/${info.id}`}>
+                        <h2 className='text-white text-xl underline font-bold mb-4'>Infos perso</h2>
+                      </Link>
+
                       <p className='text-2xl text-white'>{info.lastname}</p>
                       <p className='text-2xl text-white'>{info.firstname}</p>
                       <img
@@ -108,7 +122,7 @@ const Update = () => {
                       <p className='text-lg text-white'>{info.type_of_contract}</p>
 
                       <div className="my-4 gap-2">
-                        <h3 className='text-white text-xl font-bold mb-4'>Informations personelles</h3>
+
                         <p className='text-lg text-white'>Adresse : {info.address}</p>
                         <p className='text-lg text-white'>Ville : {info.city}</p>
                         <p className='text-lg text-white'>Code postal : {info.zipcode}</p>
@@ -122,22 +136,38 @@ const Update = () => {
                   ))}
 
 
-                  <h3 className='text-xl font-semibold underline text-white w-full mt-6'>Hobbies :</h3>
+
+                  <Link to={`/hobbies/list/${cvData.id}`}>
+                    <h3 className='text-xl font-semibold underline text-white w-full mt-6'>Hobbies :</h3>
+                  </Link>
+
+
+
+
                   {cvData.hobbies && cvData.hobbies.map((hobby, hobbyIndex) => (
                     <li className='list-inside  text-lg my-2 text-white ' key={hobbyIndex}>
                       - {hobby.title_hobby}
                     </li>
                   ))}
 
+                  <Link to={`/skills/list/${cvData.id}`}>
+                    <h3 className='text-xl font-semibold underline text-white w-full'>Compétences :</h3>
+                  </Link>
 
-                  <h3 className='text-xl font-semibold underline text-white w-full'>Compétences :</h3>
                   {cvData.skills && cvData.skills.map((skill, skillIndex) => (
                     <li className='list-inside text-lg my-2 text-white ' key={skillIndex}>
                       - {skill.title_skill}
                     </li>
                   ))}
 
-                  <h3 className='text-xl font-semibold underline text-white w-full'>Langues :</h3>
+
+
+                  <Link to={`/languages/list/${cvData.id}`}>
+                    <h3 className='text-xl font-semibold underline text-white w-full'>Langues :</h3>
+                  </Link>
+
+
+
                   {cvData.languages && cvData.languages.map((language, languageIndex) => (
                     <li className=' text-lg my-2 text-white ' key={languageIndex}>
                       <div className="">
@@ -164,7 +194,15 @@ const Update = () => {
                   </div>
 
                   <div className=" my-4 flex flex-col  w-full">
-                    <h3 className='text-white w-full flex flex-row justify-center items-center text-xl mb-3 font-bold '>Formations :</h3>
+
+
+
+                    <Link to={`/formations/list/${cvData.id}`}>
+                      <h3 className='text-white w-full flex flex-row justify-center items-center text-xl mb-3 font-bold underline '>Formations :</h3>
+                    </Link>
+
+
+
                     <div class='px-3'>
 
                       {cvData.formations && cvData.formations.map((formation, formationIndex) => (
@@ -196,7 +234,16 @@ const Update = () => {
 
 
                   <div className=" my-4 flex flex-col  w-full">
-                    <h3 className='text-white w-full flex flex-row justify-center items-center text-xl mb-3 font-bold '>Expérience :</h3>
+
+
+
+                    <Link to={`/experiences/list/${cvData.id}`}>
+                      <h3 className='text-white w-full flex flex-row justify-center items-center text-xl mb-3 font-bold underline'>Expérience :</h3>
+                    </Link>
+
+
+
+
                     <div class='px-3'>
 
                       {cvData.experiences && cvData.experiences.map((experience, experienceIndex) => (
@@ -238,4 +285,4 @@ const Update = () => {
   );
 }
 
-export default Update;
+export default Detail;

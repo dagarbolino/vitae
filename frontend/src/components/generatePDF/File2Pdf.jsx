@@ -107,7 +107,7 @@ const FilePdf = () => {
             onClick={changeColorText}>Changer la couleur du texte</button>
 
 
-          <div id="cvContent" className="flex w-full flex-col justify-center items-center m-5  h-[1448px] max-w-[1024px]">
+          <div id="cvContent" className="flex w-full flex-col justify-start items-center m-5  h-[1448px] max-w-[1024px]">
             <div className="flex flex-row  p-4">
               {cvData ? (
                 <ul className="flex flex-col space-y-4 w-full">

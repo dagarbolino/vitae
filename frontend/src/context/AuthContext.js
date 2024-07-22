@@ -26,44 +26,48 @@ export const AuthProvider = ({ children }) => {
     const navigate = useNavigate()
 
     const loginUser = async (email, password) => {
-        let url = "http://127.0.0.1:8000/api/token/"
-        const response = await fetch(url,{
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({email, password})
-        })
-        const data = await response.json()
-
-        if (response.status === 200){
-            setAuthTokens(data)
-            setUser(jwtDecode(data.access))
-            localStorage.setItem("authTokens", JSON.stringify(data));
-            navigate("/")
+        let url = "http://127.0.0.1:8000/api/token/";
+        try {
+            const response = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ email, password })
+            });
+            const data = await response.json();
+    
+            if (response.status === 200) {
+                setAuthTokens(data);
+                setUser(jwtDecode(data.access));
+                localStorage.setItem("authTokens", JSON.stringify(data));
+                navigate("/");
+                swal.fire({
+                    title: "Successful connection",
+                    icon: "success",
+                    toast: true,
+                    timer: 6000,
+                    position: 'top-right',
+                    timerProgressBar: true,
+                    showConfirmButton: false
+                });
+            } else {
+                throw new Error(`Server responded with status: ${response.status}`);
+            }
+        } catch (error) {
+            console.error("Login error:", error);
             swal.fire({
-                title: "Successful connection",
-                icon: "success",
-                toast: true,
-                timer: 6000,
-                position: 'top-right',
-                timerProgressBar: true,
-                showConfirmButton: false
-            })
-        } else {
-            console.log(response.status)
-            console.log("An error has occurred")
-            swal.fire({
-                title: "Email - Password does not exist",
+                title: "An error has occurred",
+                text: error.toString(),
                 icon: "error",
                 toast: true,
                 timer: 6000,
                 position: 'top-right',
                 timerProgressBar: true,
                 showConfirmButton: false
-            })
+            });
         }
-    }
+    };
 
     const registerUser = async (full_name, email, username, password, password2) => {
         let url = "http://127.0.0.1:8000/api/register/"

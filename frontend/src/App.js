@@ -9,7 +9,7 @@ import CreateSkill from "./components/curriculumCreate/CreateSkill";
 import CreateLangue from "./components/curriculumCreate/CreateLangue";
 import CreateFormation from "./components/curriculumCreate/CreateFormation";
 import CreateExperience from "./components/curriculumCreate/CreateExperience";
-import Update from "./pages/Update";
+import Detail from "./pages/Detail";
 import ProtectedRoute from "./utils/ProtectedRoute";
 
 import ListDeleteInfo from './components/curriculumListDelete/ListDeleteInfo';
@@ -22,6 +22,7 @@ import FilePdf from './components/generatePDF/FilePdf';
 import File2Pdf from './components/generatePDF/File2Pdf';
 import File3Pdf from './components/generatePDF/File3Pdf';
 
+import UpdateCv from './pages/UpdateCv';
 
 
 const App = () => (
@@ -36,7 +37,7 @@ const App = () => (
 
         {/* Routes protégées */}
         <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-        <Route path="/dashboard/detail-cv/:id" element={<ProtectedRoute><Update /></ProtectedRoute>} />
+        <Route path="/dashboard/detail-cv/:id" element={<ProtectedRoute><Detail /></ProtectedRoute>} />
         <Route path="/create-cv" element={<ProtectedRoute><CreateCv /></ProtectedRoute>} />
 
 
@@ -49,7 +50,8 @@ const App = () => (
         <Route path="/experience/create" element={<ProtectedRoute><CreateExperience /></ProtectedRoute>} />
 
 
-        <Route path="/infos/list" element={<ProtectedRoute><ListDeleteInfo/></ProtectedRoute>} />
+        <Route path="/info/list/:id" element={<ProtectedRoute><ListDeleteInfo/></ProtectedRoute>} />
+        <Route path='/update/:id' element={<ProtectedRoute><UpdateCv /></ProtectedRoute>} /> 
 
         <Route path="/hobbies/list" element={<ProtectedRoute><ListDeleteHobby/></ProtectedRoute>} />
         <Route path="/skills/list" element={<ProtectedRoute><ListDeleteSkills /></ProtectedRoute>} />
