@@ -2,8 +2,6 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
 
-import { useNavigate } from 'react-router-dom';
-
 const ListEditDeleteInfo = () => {
   const [infos, setInfos] = useState([]);
 
@@ -20,7 +18,7 @@ const ListEditDeleteInfo = () => {
   const [editedPhone, setEditedPhone] = useState('');
   const [editedEmail, setEditedEmail] = useState('');
   const [editedMotivation, setEditedMotivation] = useState('');
-  const navigate = useNavigate();
+
 
   useEffect(() => {
     fetchInfos();

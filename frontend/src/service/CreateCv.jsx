@@ -2,6 +2,8 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import SelectionComponent from '../components/ui/SelectionComponent';
+
 const CreateCv = () => {
   const [title, setTitle] = useState('');
   const [userId, setUserId] = useState('');
@@ -160,6 +162,7 @@ const CreateCv = () => {
 
   return (
     <div className='container mx-auto p-4'>
+
       <h2 className='text-2xl font-bold mb-4'>Ajouter un curriculum</h2>
       <form onSubmit={handleSubmit}>
         {/* Champ Titre */}
@@ -180,135 +183,66 @@ const CreateCv = () => {
         <div className='mb-4'>
           <label htmlFor='userId' className='block text-sm font-medium text-gray-700'>Identifiant de l'utilisateur</label>
           <input
-            type='number' // Type correct pour un identifiant numérique
+            type='number' 
             id='userId'
             value={userId}
             onChange={(e) => setUserId(e.target.value)}
             required
-            className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-2 rounded-md border-gray-300 rounded-md'
+            className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-2 border-gray-300 rounded-md'
           />
         </div>
 
-        {/* Liste des informations */}
-        <div className='mb-4'>
-          <fieldset>
-            <legend className='text-lg font-semibold'>Informations</legend>
-            {infos.map(info => (
-              <div 
-              className='flex flex-row justify-start items-center gap-2'
-              key={info.id}>
-                <input
-                  type="checkbox"
-                  id={`info-${info.id}`}
-                  checked={selectedInfos.includes(info.id)}
-                  onChange={() => handleInfoChange(info.id)}
-                />
-                <label htmlFor={`info-${info.id}`}>{info.lastname}</label>
-              </div>
-            ))}
-          </fieldset>
-        </div>
-
-        {/* Liste des hobbies */}
-
-        <div className='mb-4'>
-          <fieldset>
-            <legend className='text-lg font-semibold'>Loisirs</legend>
-            {hobbies.map(hobby => (
-              <div 
-              className='flex flex-row justify-start items-center gap-2'
-              key={hobby.id}>
-                <input
-                  type="checkbox"
-                  id={`hobby-${hobby.id}`}
-                  checked={selectedHobbies.includes(hobby.id)}
-                  onChange={() => handleHobbyChange(hobby.id)}
-                />
-                <label htmlFor={`hobby-${hobby.id}`}>{hobby.title_hobby}</label>
-              </div>
-            ))}
-          </fieldset>
-        </div>
 
 
-        <div className='mb-4'>
-          <fieldset>
-            <legend className='text-lg font-semibold'>Compétences</legend>
-            {skills.map(skill => (
-              <div 
-              className='flex flex-row justify-start items-center gap-2'
-              key={skill.id}>
-                <input
-                  type="checkbox"
-                  id={`skill-${skill.id}`}
-                  checked={selectedSkills.includes(skill.id)}
-                  onChange={() => handleSkillChange(skill.id)}
-                />
-                <label htmlFor={`skill-${skill.id}`}>{skill.title_skill}</label>
-              </div>
-            ))}
-          </fieldset>
-        </div>
-
-        <div className='mb-4'>
-          <fieldset>
-            <legend className='text-lg font-semibold'>Langues</legend>
-            {languages.map(language => (
-              <div 
-              className='flex flex-row justify-start items-center gap-2'
-              key={language.id}>
-                <input
-                  type="checkbox"
-                  id={`language-${language.id}`}
-                  checked={selectedLanguages.includes(language.id)}
-                  onChange={() => handleLanguageChange(language.id)}
-                />
-                <label htmlFor={`language-${language.id}`}>{language.title_language}</label>
-              </div>
-            ))}
-          </fieldset>
-        </div>
+        <SelectionComponent
+          title="Informations"
+          items={infos}
+          selectedItems={selectedInfos}
+          handleChange={handleInfoChange}
+          titleKey="lastname"
+        />
 
 
-        <div className='mb-4'>
-          <fieldset>
-            <legend className='text-lg font-semibold'>Formations</legend>
-            {formations.map(formation => (
-              <div
-              className='flex flex-row justify-start items-center gap-2'
-              key={formation.id}>
-                <input
-                  type="checkbox"
-                  id={`formation-${formation.id}`}
-                  checked={selectedFormations.includes(formation.id)}
-                  onChange={() => handleFormationChange(formation.id)}
-                />
-                <label htmlFor={`formation-${formation.id}`}>{formation.title_formation}</label>
-              </div>
-            ))}
-          </fieldset>
-        </div>
+        <SelectionComponent
+          title="Hobbies"
+          items={hobbies}
+          selectedItems={selectedHobbies}
+          handleChange={handleHobbyChange}
+          titleKey="title_hobby"
+        />
+
+        <SelectionComponent
+          title="Compétences"
+          items={skills}
+          selectedItems={selectedSkills}
+          handleChange={handleSkillChange}
+          titleKey="title_skill"
+        />
 
 
-        <div className='mb-4'>
-          <fieldset>
-            <legend className='text-lg font-semibold'>Expériences</legend>
-            {experiences.map(experience => (
-              <div 
-              className='flex flex-row justify-start items-center gap-2'
-              key={experience.id}>
-                <input
-                  type="checkbox"
-                  id={`experience-${experience.id}`}
-                  checked={selectedExperiences.includes(experience.id)}
-                  onChange={() => handleExperienceChange(experience.id)}
-                />
-                <label htmlFor={`experience-${experience.id}`}>{experience.title_experience}</label>
-              </div>
-            ))}
-          </fieldset>
-        </div>
+        <SelectionComponent
+          title="Langue"
+          items={languages}
+          selectedItems={selectedLanguages}
+          handleChange={handleLanguageChange}
+          titleKey="title_language"
+        />
 
+        <SelectionComponent
+          title="Formations"
+          items={formations}
+          selectedItems={selectedFormations}
+          handleChange={handleFormationChange}
+          titleKey="title_formation"
+        />
+
+        <SelectionComponent
+          title="Expériences"
+          items={experiences}
+          selectedItems={selectedExperiences}
+          handleChange={handleExperienceChange}
+          titleKey="title_experience"
+        />
 
 
 

@@ -14,8 +14,8 @@ function NavBar() {
   return (
     <>
       <section className="flex flex-row justify-between items-center
-        w-full h-auto px-2
-        border-b-2 border-slate-950">
+        w-full h-auto px-2 bg-gradient-to-r from-blue-500 to-green-500
+        ">
         <h1 className='text-2xl md:text-4xl lg:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-700 to-green-400 m-2 shadow-md rounded-md p-1 text-shadow '>CVGen</h1>
         <NavLink className="">
           <Link

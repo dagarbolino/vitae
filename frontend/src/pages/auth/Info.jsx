@@ -41,7 +41,7 @@ const Info = () => {
     <>
       <div className="md:h-screen w-auto flex py-4
       flex-row justify-center items-center
-      items-centermin-h-screen bg-gradient-to-r from-blue-500 to-green-500">
+     bg-gradient-to-r from-blue-500 to-green-500">
         <div className="border-2 w-96 h-auto
       flex flex-col justify-start items-center
       rounded-2xl border-sky-800 bg-white shadow-2xl p-4">

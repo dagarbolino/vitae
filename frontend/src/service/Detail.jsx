@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import NavBar from '../components/NavBar';
 import Section from '../components/ui/Section';
 
 import ExperiencesCreateModale from '../components/modaleDetail/ExperiencesCreateModale';
@@ -44,7 +43,7 @@ const Detail = () => {
 
   return (
     <Section className="w-auto box-border m-0 p-0 flex flex-col justify-start items-center min-h-screen bg-gradient-to-r from-blue-500 to-green-500">
-      <NavBar />
+
       <div className="flex flex-row justify-center items-center my-6">
         <Link
           to={`/pdf/${id}`}

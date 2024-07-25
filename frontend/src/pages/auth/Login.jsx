@@ -7,7 +7,7 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    // console.log(e.target)
+    console.log(e.target)
 
     const email = e.target.email.value
     const password = e.target.password.value
@@ -22,7 +22,7 @@ const Login = () => {
       <div className="border-2 w-56 sm:w-72 md:w-96 lg:w-96 h-auto
     flex flex-col justify-start items-center
     rounded-2xl border-sky-800 bg-white shadow-2xl p-4 mt-6">
-      
+
         <div className='w-full h-auto  
         flex flex-col justify-start items-start '>
           <h1 className='text-2xl font-semibold

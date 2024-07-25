@@ -1,6 +1,6 @@
 export { default as Dashboard } from "./Dashboard";
 export { default as Home } from "./Home";
-export { default as CreateCv } from "./CreateCv";
+export { default as CreateCv } from "../service/CreateCv";
 
 
 export { default as Login } from "./auth/Login";

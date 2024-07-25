@@ -20,14 +20,14 @@ const Home = () => {
       <div className="border-2 w-56 sm:w-72 md:w-96 lg:w-96 h-auto
     flex flex-col justify-start items-center
     rounded-2xl border-sky-800 bg-white shadow-2xl p-4 mt-6">
-        <div class='w-full
+        <div className='w-full
         flex flex-col justify-start items-start 
         '>
-          <h1 class='text-xl sm:text-2xl md:text-3xl  font-semibold
+          <h1 className='text-xl sm:text-2xl md:text-3xl  font-semibold
           flex flex-row justify-center items-center
           w-full h-10
           '>Welcome !</h1>
-          <p class='text-xl sm:text-2xl md:text-3xl  font-semibold
+          <p className='text-xl sm:text-2xl md:text-3xl  font-semibold
           flex flex-row justify-center items-center
           w-full h-10 mb-10
           '>on the Vitae website !!</p>

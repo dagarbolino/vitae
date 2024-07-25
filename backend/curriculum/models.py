@@ -26,9 +26,6 @@ class Curriculum(models.Model):
 
 
 
-
-        
-        
 class Info(models.Model):
     lastname = models.CharField("nom de la personne", max_length=120)
     firstname = models.CharField("prénom de la personne", max_length=120, blank=True, null=True)
@@ -45,7 +42,6 @@ class Info(models.Model):
     motivation = models.TextField("motivation de la personne", blank=True, null=True)
     
     active = models.BooleanField("curriculum is active?", default=True)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
     curriculum = models.ForeignKey(Curriculum, on_delete=models.CASCADE, related_name='info', null=True)
     
     def __str__(self):
@@ -54,17 +50,13 @@ class Info(models.Model):
     class Meta:
         verbose_name = "Info"
         verbose_name_plural = "Infos"  
-        
-    
-        
-        
-        
-        
+
+
+
 class Hobby(models.Model):
     title_hobby = models.CharField("titre du hobbie", max_length=120)
     active = models.BooleanField("curriculum is active?", default=True)
     
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
     curriculum = models.ForeignKey(Curriculum, on_delete=models.CASCADE, related_name='hobby_info', null=True)
     
     def __str__(self):
@@ -75,7 +67,6 @@ class Hobby(models.Model):
         verbose_name_plural = "Hobbies"  
         
 
-
 class Formation(models.Model):
     title_formation = models.CharField("titre de la formation", max_length=120)
     description_formation = models.TextField("description de la formation")
@@ -85,7 +76,6 @@ class Formation(models.Model):
     location_formation = models.CharField("lieu de la formation", max_length=100)
     active = models.BooleanField("curriculum is active?", default=True)
     
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
     curriculum = models.ForeignKey(Curriculum, on_delete=models.CASCADE, related_name='formation_info', null=True)
     
     def __str__(self):
@@ -94,10 +84,8 @@ class Formation(models.Model):
     class Meta:
         verbose_name = "Formation"
         verbose_name_plural = "Formations"  
-        
-        
-        
-        
+
+
 class Experience(models.Model):
     title_experience = models.CharField("titre de la l'expérience", max_length=120)
     description_experience = models.TextField("description de l'expérience")
@@ -107,7 +95,6 @@ class Experience(models.Model):
     location_experience = models.CharField("lieu de l'expérience", max_length=100)
     active = models.BooleanField("curriculum is active?", default=True)
     
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
     Curriculum = models.ForeignKey(Curriculum, on_delete=models.CASCADE, related_name='experience_info', null=True)
 
     
@@ -123,7 +110,6 @@ class Skill(models.Model):
     title_skill = models.CharField("titre de la compétence", max_length=120)
     active = models.BooleanField("curriculum is active?", default=True)
     
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
     Curriculum = models.ForeignKey(Curriculum, on_delete=models.CASCADE, related_name='skill_info', null=True)
     
     def __str__(self):
@@ -144,7 +130,6 @@ class Language(models.Model):
     niveau_language = models.CharField("niveau de la langue choisie", max_length=120, choices=niveau_choices)
     active = models.BooleanField("curriculum is active?", default=True)
     
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
     Curriculum = models.ForeignKey(Curriculum, on_delete=models.CASCADE, related_name='language_info', null=True)
 
     def __str__(self):

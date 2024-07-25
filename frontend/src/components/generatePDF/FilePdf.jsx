@@ -88,13 +88,13 @@ const FilePdf = () => {
     });
   };
 
-  // Rendu du composant
+
   return (
     <>
-      <Section>
+      <Section className='bg-gradient-to-r from-blue-500 to-green-500'>
         <div style={{ color: colorText }}>
-          <button onClick={generatePDF} className='bg-blue-500 p-2 rounded-md m-2 w-auto hover:bg-blue-600 transition-colors duration-300 ease-in-out'>
-            Générer PDF
+          <button onClick={generatePDF} className='bg-blue-500 p-2 rounded-md m-2 w-auto hover:bg-blue-600 transition-colors duration-300 ease-in-out border-2'>
+            Générer le PDF 
           </button>
         </div>
 

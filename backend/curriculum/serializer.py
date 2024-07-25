@@ -6,7 +6,7 @@ class InfoSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Info
-        fields = ['id', 'user', 'lastname', 'firstname', 'type_of_contract', 'date_of_birth', 'place_of_birth', 'address', 'city', 'state', 'zipcode', 'phone', 'email', 'photo', 'motivation']
+        fields = ['id', 'lastname', 'firstname', 'type_of_contract', 'date_of_birth', 'place_of_birth', 'address', 'city', 'state', 'zipcode', 'phone', 'email', 'photo', 'motivation']
         
     def validate_lastname(self, value):
         if not value:
@@ -23,7 +23,6 @@ class HobbySerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("The title_hobby field cannot be empty.")
         return value
         
-
 class SkillSerializer(serializers.ModelSerializer):
     class Meta:
         model = Skill
@@ -33,7 +32,6 @@ class SkillSerializer(serializers.ModelSerializer):
         if not value:
             raise serializers.ValidationError("The title_skill field cannot be empty.")
         return value    
-        
         
 class LanguageSerializer(serializers.ModelSerializer):
     class Meta:
@@ -46,7 +44,6 @@ class LanguageSerializer(serializers.ModelSerializer):
         
         return value   
         
-        
 class FormationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Formation
@@ -57,7 +54,6 @@ class FormationSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("The title_formation field cannot be empty.")
         return value   
         
-        
 class ExperienceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Experience
@@ -67,10 +63,7 @@ class ExperienceSerializer(serializers.ModelSerializer):
         if not value:
             raise serializers.ValidationError("The title_experience field cannot be empty.")
         return value    
-        
-                
 
-        
 class CurriculumSerializer(serializers.ModelSerializer):
     
     class Meta:
@@ -84,19 +77,6 @@ class CurriculumSerializer(serializers.ModelSerializer):
     experiences = ExperienceSerializer(many=True, read_only=True)
     skills = SkillSerializer(many=True, read_only=True)
     languages = LanguageSerializer(many=True, read_only=True)
-    
-
-
-
-
-
-
-
-
-
-
-
-
 
 class CurriculumCretateSerializer(serializers.ModelSerializer):
 
@@ -139,6 +119,5 @@ class CurriculumCretateSerializer(serializers.ModelSerializer):
             curriculum.languages.set(languages_instances)
                 
         return curriculum
-        
 
- 
+
