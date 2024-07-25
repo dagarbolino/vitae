@@ -15,6 +15,7 @@ import File2Pdf from './components/generatePDF/File2Pdf';
 import File3Pdf from './components/generatePDF/File3Pdf';
 
 import UpdateCv from './service/UpdateCv';
+import Footer from './components/Footer';
 
 
 const App = () => (
@@ -37,6 +38,7 @@ const App = () => (
         <Route path="/pdf2/:id" element={<ProtectedRoute><File2Pdf /></ProtectedRoute>} />
         <Route path="/pdf3/:id" element={<ProtectedRoute><File3Pdf /></ProtectedRoute>} />
       </Routes>
+      <Footer />
     </AuthProvider>
   </Router>
 );

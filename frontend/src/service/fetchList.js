@@ -30,13 +30,13 @@ const FetchList = () => {
   };
 
   return (
-    <div className='mt-10'>
-      <ul className='flex flex-row justify-center items-start gap-8 '>
+    <div className='w-full mt-10'>
+      <ul className=' w-full  flex flex-col md:flex-row justify-center items-center gap-9'>
         {data.map((item, index) => (
           <li 
-            className='border-2 rounded-md p-4 w-72'
+            className='border-2 rounded-md p-4 w-full md:w-72 mt-10'
             key={index}>
-            <p className='text-white text-2xl py-2  flex flex-row justify-center items-center w-full  hover:text-blue-700 transition duration-700 font-semibold hover:underline'>
+            <p className='text-white text-2xl py-2 w-full  hover:text-blue-700 transition duration-700 font-semibold hover:underline'>
               <Link to={`detail-cv/${item.id}`}>{item.title}</Link>
             </p>
             <p className='text-lg text-white'>Créé le : {item.created_at ? new Date(item.created_at).toLocaleDateString() : 'Date non disponible'}</p>

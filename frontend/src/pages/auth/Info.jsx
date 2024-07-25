@@ -40,18 +40,11 @@ const Info = () => {
   return (
     <>
       <div className="md:h-screen w-auto flex py-4
-      flex-row justify-center items-center
-     bg-gradient-to-r from-blue-500 to-green-500">
-        <div className="border-2 w-96 h-auto
-      flex flex-col justify-start items-center
-      rounded-2xl border-sky-800 bg-white shadow-2xl p-4">
+      flex-row justify-center items-center bg-gradient-to-r from-blue-500 to-green-500">
+        <div className="border-2 w-96 h-auto flex flex-col justify-start items-center rounded-2xl border-sky-800 bg-white shadow-2xl p-4">
 
-          <div className='w-full
-    flex flex-col justify-start items-start  
-    '>
-            <h1 className='text-3xl font-bold
-      flex flex-row justify-center items-center
-      w-full h-10 mb-6'>
+          <div className='w-full flex flex-col justify-start items-start '>
+            <h1 className='text-3xl font-bold flex flex-row justify-center items-center w-full h-10 mb-6'>
               Vos information
             </h1>
             <p className='text-xl font-semibold m-2'>Welcome, {username}</p>
@@ -63,10 +56,7 @@ const Info = () => {
             <br />
             <span className='text-lg mx-4'>Email: {email}</span>
             <br /><br />
-            <span className='text-lg font-semibold my-6
-      flex flex-row justify-center items-center
-      w-full h-auto
-      '>{response}</span>
+            <span className='text-lg font-semibold my-6 flex flex-row justify-center items-center w-full h-auto '>{response}</span>
             <br /><br />
             <Link
               className='w-full bg-blue-800 text-white mb-2 p-2 rounded-md
