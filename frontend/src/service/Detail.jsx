@@ -17,11 +17,14 @@ import SkillDelUpModale from '../components/modaleDetail/SkillDelUpModale';
 import UpdateCv from './UpdateCv';
 
 
-
 const Detail = () => {
   const { id } = useParams();
   const [cvData, setCvData] = useState(null);
+  const [info, setInfos] = useState([]);
 
+  const handleAddInfo = (newInfo) => {
+    setInfos([...info, newInfo]);
+  };
 
 
   useEffect(() => {
@@ -34,12 +37,13 @@ const Detail = () => {
         console.error("Erreur lors de la récupération des données du CV:", error);
       }
     };
-
     fetchCvData();
   }, [id]);
 
 
-
+  const handleUpdateCv = (updatedData) => {
+    setCvData(updatedData);
+  };
 
 
   return (
@@ -67,48 +71,35 @@ const Detail = () => {
 
       <div id="cvContent" className="flex w-full flex-col justify-center items-center m-4">
         <div className="flex flex-row ">
-
-
-
           {cvData ? (
             <ul className="flex flex-col space-y-4 w-full">
 
+
               <div className="flex flex-col justify-center items-center gap-4">
                 <h1 className='text-lg md:text-3xl text-white mt-10 '>Détail de votre curriculum vitae :
-
                 </h1>
+
+                {/*Ici, on modifie le cv */}
                 <span className='mx-6 px-2 text-white text-xl md:text-4xl border-2 rounded-md'>{cvData.title}</span>
-
-
-
-
-
-
                 <button className="mt-10 btn text-xl text-white hover:text-blue-700 transition duration-700 font-semibold m-4 hover:underline"
                   onClick={() => document.getElementById('my_modal_1').showModal()}>
                   Modifier le CV ici !
                 </button>
 
-                <dialog id="my_modal_1"
-                  className=" w-96 h-auto p-4 rounded-md">
+                <dialog id="my_modal_1" className="w-96 h-auto p-4 rounded-md">
                   <div className="modal-box">
-
                     <div className="modal-action flex flex-row justify-end w-full">
                       <form method="dialog">
                         <button className="bg-red-600 p-2 rounded-md">Close</button>
                       </form>
                     </div>
-                    <UpdateCv />
+                    <UpdateCv onUpdate={handleUpdateCv} />
                   </div>
                 </dialog>
-
-
-
-
               </div>
 
+              {/* Ici, on affiche les infos personnelles */}
               <div className="flex flex-row gap-6 mt-6 max-w-[1024px] bg-slate-400 ">
-
                 <div className="my-2 w-1/4 p-2 md:p-4">
                   {cvData.infos && cvData.infos.map((info, infoIndex) => (
 
@@ -117,8 +108,7 @@ const Detail = () => {
                       <div className="w-full flex flex-row justify-between items-center">
                         <button className="btn" onClick={() => document.getElementById('my_modal_info_1').showModal()}>
                           <h3 className='text-slate-600  flex flex-row justify-center items-center  text-[10px] md:text-xl mb-3 font-bold 
-                    hover:text-blue-800 transition duration-500 hover:scale-110 transform hover:rotate-12
-                    '>
+                    hover:text-blue-800 transition duration-500 hover:scale-110 transform hover:rotate-12'>
                             Infos perso:
                           </h3>
                         </button>
@@ -126,8 +116,7 @@ const Detail = () => {
                         <button className="btn " onClick={() => document.getElementById('my_modal_info_2').showModal()}>
                           <h3 className='text-slate-600 flex flex-row justify-center items-center text-sm mb-3 font-bold 
                     border-2 rounded-md p-2 w-2 h-2 md:w-8 md:h-8
-                    hover:text-blue-800 transition duration-500 hover:scale-110 transform hover:rotate-12
-                    '>
+                    hover:text-blue-800 transition duration-500 hover:scale-110 transform hover:rotate-12'>
                             +
                           </h3>
                         </button>
@@ -135,10 +124,6 @@ const Detail = () => {
 
                       <dialog id="my_modal_info_1" className="w-[500px] h-auto p-4 rounded-md">
                         <div className="modal-box">
-                          <Link to={`/info/list/${info.id}`}>
-                            <h3 className='text-xl font-semibold underline text-white w-full'>info :</h3>
-                          </Link>
-
                           <div className="modal-action flex flex-row justify-end ">
                             <form method="dialog">
                               <button className="bg-red-600 p-2 rounded-md w-full flex justify-center items-center">Close</button>
@@ -146,25 +131,18 @@ const Detail = () => {
                           </div>
                         </div>
                         <InfoDelUpModale />
-
                       </dialog>
 
                       <dialog id="my_modal_info_2" className="w-[500px] h-auto p-4 rounded-md">
                         <div className="modal-box">
-                          <Link to={`/info/list/${cvData.id}`}>
-                            <h3 className='text-xl font-semibold underline text-white w-full'>Créer des infos personelles :</h3>
-                          </Link>
                           <div className="modal-action flex flex-row justify-end ">
                             <form method="dialog">
                               <button className="bg-red-600 p-2 rounded-md w-full flex justify-center items-center">Close</button>
                             </form>
                           </div>
-
-                          <InfoCreateModale />
-
+                          <InfoCreateModale onAddInfo={handleAddInfo} />
                         </div>
                       </dialog>
-
 
                       <p className='text-sm md:text-2xl text-white'>{info.lastname}</p>
                       <p className='text-sm md:text-2xl text-white'>{info.firstname}</p>
@@ -176,7 +154,6 @@ const Detail = () => {
                       <p className=' text-[10px] md:text-lg text-white'>{info.type_of_contract}</p>
 
                       <div className="my-4 gap-2">
-
                         <p className=' text-[10px] md:text-lg text-white'>Adresse : {info.address}</p>
                         <p className=' text-[10px] md:text-lg text-white'>Ville : {info.city}</p>
                         <p className=' text-[10px] md:text-lg text-white'>Code postal : {info.zipcode}</p>
@@ -189,15 +166,11 @@ const Detail = () => {
                     </div>
                   ))}
 
-
-
-
-
+                  {/* Ici, on affiche les hobbies */}
                   <div className="w-full  flex flex-row justify-between items-center">
                     <button className="btn " onClick={() => document.getElementById('my_modal_hobbi_1').showModal()}>
                       <h3 className='text-slate-600  flex flex-row justify-center items-center  text-[10px] md:text-xl mb-3 font-bold 
-                    hover:text-blue-800 transition duration-500 hover:scale-110 transform hover:rotate-12
-                    '>
+                    hover:text-blue-800 transition duration-500 hover:scale-110 transform hover:rotate-12'>
                         Hobbies:
                       </h3>
                     </button>
@@ -205,8 +178,7 @@ const Detail = () => {
                     <button className="btn " onClick={() => document.getElementById('my_modal_hobbi_2').showModal()}>
                       <h3 className='text-slate-600 flex flex-row justify-center items-center text-sm mb-3 font-bold 
                     border-2 rounded-md p-2 w-2 h-2 md:w-8 md:h-8
-                    hover:text-blue-800 transition duration-500 hover:scale-110 transform hover:rotate-12
-                    '>
+                    hover:text-blue-800 transition duration-500 hover:scale-110 transform hover:rotate-12'>
                         +
                       </h3>
                     </button>
@@ -214,10 +186,6 @@ const Detail = () => {
 
                   <dialog id="my_modal_hobbi_1" className="w-[500px] h-auto p-4 rounded-md">
                     <div className="modal-box">
-                      <Link to={`/hobbies/list/${cvData.id}`}>
-                        <h3 className='text-lg font-semibold underline text-white w-full'>Hobbies :</h3>
-                      </Link>
-
                       <div className="modal-action flex flex-row justify-end ">
                         <form method="dialog">
                           <button className="bg-red-600 p-2 rounded-md w-full flex justify-center items-center">Close</button>
@@ -230,20 +198,14 @@ const Detail = () => {
 
                   <dialog id="my_modal_hobbi_2" className="w-[500px] h-auto p-4 rounded-md">
                     <div className="modal-box">
-                      <Link to={`/hobbies/list/${cvData.id}`}>
-                        <h3 className='text-xl font-semibold underline text-white w-full'>Créer un Hobbies :</h3>
-                      </Link>
                       <div className="modal-action flex flex-row justify-end ">
                         <form method="dialog">
                           <button className="bg-red-600 p-2 rounded-md w-full flex justify-center items-center">Close</button>
                         </form>
                       </div>
-
                       <HobbiesCreateModale />
-
                     </div>
                   </dialog>
-
 
                   {cvData.hobbies && cvData.hobbies.map((hobby, hobbyIndex) => (
                     <li className='list-inside  text-[10px] md:text-lg my-2 text-white ' key={hobbyIndex}>
@@ -251,14 +213,12 @@ const Detail = () => {
                     </li>
                   ))}
 
-
-
+                  {/* Ici, on affiche les compétences */}
 
                   <div className="w-full flex flex-row justify-between items-center">
                     <button className="btn" onClick={() => document.getElementById('my_modal_skill_1').showModal()}>
                       <h3 className='text-slate-600  flex flex-row justify-center items-center  text-[10px] md:text-xl mb-3 font-bold 
-                    hover:text-blue-800 transition duration-500 hover:scale-110 transform hover:rotate-12
-                    '>
+                    hover:text-blue-800 transition duration-500 hover:scale-110 transform hover:rotate-12'>
                         Compétences:
                       </h3>
                     </button>
@@ -266,8 +226,7 @@ const Detail = () => {
                     <button className="btn" onClick={() => document.getElementById('my_modal_skill_2').showModal()}>
                       <h3 className='text-slate-600 flex flex-row justify-center items-center text-sm mb-3 font-bold 
                     border-2 rounded-md p-2 w-2 h-2 md:w-8 md:h-8
-                    hover:text-blue-800 transition duration-500 hover:scale-110 transform hover:rotate-12
-                    '>
+                    hover:text-blue-800 transition duration-500 hover:scale-110 transform hover:rotate-12'>
                         +
                       </h3>
                     </button>
@@ -275,9 +234,6 @@ const Detail = () => {
 
                   <dialog id="my_modal_skill_1" className="w-[500px] h-auto p-4 rounded-md">
                     <div className="modal-box">
-                      <Link to={`/skills/list/${cvData.id}`}>
-                        <h3 className='text-xl font-semibold underline text-white w-full'>Compétences :</h3>
-                      </Link>
 
                       <div className="modal-action flex flex-row justify-end ">
                         <form method="dialog">
@@ -286,22 +242,17 @@ const Detail = () => {
                       </div>
                     </div>
                     <SkillDelUpModale />
-
                   </dialog>
 
                   <dialog id="my_modal_skill_2" className="w-[500px] h-auto p-4 rounded-md">
                     <div className="modal-box">
-                      <Link to={`/skills/list/${cvData.id}`}>
-                        <h3 className='text-xl font-semibold underline text-white w-full'>Créer une compétence :</h3>
-                      </Link>
+
                       <div className="modal-action flex flex-row justify-end ">
                         <form method="dialog">
                           <button className="bg-red-600 p-2 rounded-md w-full flex justify-center items-center">Close</button>
                         </form>
                       </div>
-
                       <SkillCreateModale />
-
                     </div>
                   </dialog>
 
@@ -311,12 +262,12 @@ const Detail = () => {
                     </li>
                   ))}
 
+                  {/* Ici, on affiche les langues */}
 
                   <div className="w-full flex flex-row justify-between items-center">
-                    <button className="btn" onClick={() => document.getElementById('my_modal_1').showModal()}>
+                    <button className="btn" onClick={() => document.getElementById('my_modal_Langues_1').showModal()}>
                       <h3 className='text-slate-600  flex flex-row justify-center items-center  text-[10px] md:text-xl mb-3 font-bold 
-                    hover:text-blue-800 transition duration-500 hover:scale-110 transform hover:rotate-12
-                    '>
+                    hover:text-blue-800 transition duration-500 hover:scale-110 transform hover:rotate-12'>
                         Langues:
                       </h3>
                     </button>
@@ -324,19 +275,14 @@ const Detail = () => {
                     <button className="btn" onClick={() => document.getElementById('my_modal_2').showModal()}>
                       <h3 className='text-slate-600 flex flex-row justify-center items-center text-sm mb-3 font-bold 
                     border-2 rounded-md p-2 w-2 h-2 md:w-8 md:h-8
-                    hover:text-blue-800 transition duration-500 hover:scale-110 transform hover:rotate-12
-                    '>
+                    hover:text-blue-800 transition duration-500 hover:scale-110 transform hover:rotate-12'>
                         +
                       </h3>
                     </button>
                   </div>
 
-                  <dialog id="my_modal_1" className="w-[500px] h-auto p-4 rounded-md">
+                  <dialog id="my_modal_Langues_1" className="w-[500px] h-auto p-4 rounded-md">
                     <div className="modal-box">
-                      <Link to={`/languages/list/${cvData.id}`}>
-                        <h3 className='text-xl font-semibold underline text-white w-full'>Langues :</h3>
-                      </Link>
-
                       <div className="modal-action flex flex-row justify-end ">
                         <form method="dialog">
                           <button className="bg-red-600 p-2 rounded-md w-full flex justify-center items-center">Close</button>
@@ -349,21 +295,14 @@ const Detail = () => {
 
                   <dialog id="my_modal_2" className="w-[500px] h-auto p-4 rounded-md">
                     <div className="modal-box">
-                      <Link to={`/languages/list/${cvData.id}`}>
-                        <h3 className='text-xl font-semibold underline text-white w-full'>Créer une langues :</h3>
-                      </Link>
                       <div className="modal-action flex flex-row justify-end ">
                         <form method="dialog">
                           <button className="bg-red-600 p-2 rounded-md w-full flex justify-center items-center">Close</button>
                         </form>
                       </div>
-
                       <CreateLanguage />
-
                     </div>
                   </dialog>
-
-
 
                   {cvData.languages && cvData.languages.map((language, languageIndex) => (
                     <li className=' text-[10px] md:text-lg my-2 text-white ' key={languageIndex}>
@@ -374,10 +313,8 @@ const Detail = () => {
                     </li>
                   ))}
                 </div>
-
-
+                {/* Ici, on affiche les motivations */}
                 <div className="flex flex-col justify-start items-center w-3/4 h-full">
-
                   <div className="border-2 rounded-md md:my-4  md:p-4">
                     {cvData.infos && cvData.infos.map((info, infoIndex) => (
                       <div class=" border-2 border-slate-400 rounded-md  p-1 flex flex-col justify-start items-start w-full ">
@@ -386,16 +323,12 @@ const Detail = () => {
                     ))}
                   </div>
 
-
-
-
+                  {/* Ici, on affiche les formations */}
                   <div className=" my-4 flex flex-col  w-full">
-
                     <div className="w-auto mx-10 flex flex-row justify-between items-center">
                       <button className="btn" onClick={() => document.getElementById('my_modal_formations_1').showModal()}>
                         <h3 className='text-slate-600  flex flex-row justify-center items-center  text-[10px] md:text-xl mb-3 font-bold 
-                    hover:text-blue-800 transition duration-500 hover:scale-110 transform hover:rotate-12
-                    '>
+                    hover:text-blue-800 transition duration-500 hover:scale-110 transform hover:rotate-12'>
                           Formations:
                         </h3>
                       </button>
@@ -403,8 +336,7 @@ const Detail = () => {
                       <button className="btn" onClick={() => document.getElementById('my_modal_formations_2').showModal()}>
                         <h3 className='text-slate-600 flex flex-row justify-center items-center text-sm mb-3 font-bold 
                     border-2 rounded-md p-2 w-2 h-2 md:w-8 md:h-8
-                    hover:text-blue-800 transition duration-500 hover:scale-110 transform hover:rotate-12
-                    '>
+                    hover:text-blue-800 transition duration-500 hover:scale-110 transform hover:rotate-12'>
                           +
                         </h3>
                       </button>
@@ -412,43 +344,27 @@ const Detail = () => {
 
                     <dialog id="my_modal_formations_1" className="w-[500px] h-auto p-4 rounded-md">
                       <div className="modal-box">
-                        <Link to={`/formations/list/${cvData.id}`}>
-                          <h3 className='text-xl font-semibold underline text-white w-full'>Formations :</h3>
-                        </Link>
-
                         <div className="modal-action flex flex-row justify-end ">
                           <form method="dialog">
                             <button className="bg-red-600 p-2 rounded-md w-full flex justify-center items-center">Close</button>
                           </form>
                         </div>
                       </div>
-
                       <FormationDelUpModale />
-
                     </dialog>
 
                     <dialog id="my_modal_formations_2" className="w-[500px] h-auto p-4 rounded-md">
                       <div className="modal-box">
-                        <Link to={`/formations/list/${cvData.id}`}>
-                          <h3 className='text-xl font-semibold underline text-white w-full'>Créer une Formations :</h3>
-                        </Link>
                         <div className="modal-action flex flex-row justify-end ">
                           <form method="dialog">
                             <button className="bg-red-600 p-2 rounded-md w-full flex justify-center items-center">Close</button>
                           </form>
                         </div>
-
                         <FormationCreateModale />
-
                       </div>
                     </dialog>
 
-
-
-
-
                     <div class='px-1 md:px-3'>
-
                       {cvData.formations && cvData.formations.map((formation, formationIndex) => (
                         <li className='flex flex-col text-lg my-2 text-white border-s-2 mb-6 pl-2 md:px-4' key={formationIndex}>
 
@@ -476,15 +392,12 @@ const Detail = () => {
                     </div>
                   </div>
 
-
+                  {/* Ici, on affiche les expériences */}
                   <div className=" my-4 flex flex-col  w-full">
-
-
                     <div className="w-auto mx-10 flex flex-row justify-between items-center">
                       <button className="btn" onClick={() => document.getElementById('my_modal_expériences_1').showModal()}>
                         <h3 className='text-slate-600  flex flex-row justify-center items-center  text-[10px] md:text-xl mb-3 font-bold 
-                    hover:text-blue-800 transition duration-500 hover:scale-110 transform hover:rotate-12
-                    '>
+                    hover:text-blue-800 transition duration-500 hover:scale-110 transform hover:rotate-12'>
                           Expérience:
                         </h3>
                       </button>
@@ -492,8 +405,7 @@ const Detail = () => {
                       <button className="btn" onClick={() => document.getElementById('my_modal_expériences_2').showModal()}>
                         <h3 className='text-slate-600 flex flex-row justify-center items-center text-sm mb-3 font-bold 
                     border-2 rounded-md p-2 w-2 h-2 md:w-8 md:h-8
-                    hover:text-blue-800 transition duration-500 hover:scale-110 transform hover:rotate-12
-                    '>
+                    hover:text-blue-800 transition duration-500 hover:scale-110 transform hover:rotate-12'>
                           +
                         </h3>
                       </button>
@@ -501,10 +413,6 @@ const Detail = () => {
 
                     <dialog id="my_modal_expériences_1" className="w-[500px] h-auto p-4 rounded-md">
                       <div className="modal-box">
-                        <Link to={`/expériences/list/${cvData.id}`}>
-                          <h3 className='text-xl font-semibold underline text-white w-full'>Expérience :</h3>
-                        </Link>
-
                         <div className="modal-action flex flex-row justify-end ">
                           <form method="dialog">
                             <button className="bg-red-600 p-2 rounded-md w-full flex justify-center items-center">Close</button>
@@ -512,27 +420,19 @@ const Detail = () => {
                         </div>
                       </div>
                       <ExperiencesDelUpModale />
-
                     </dialog>
 
                     <dialog id="my_modal_expériences_2" className="w-[500px] h-auto p-4 rounded-md">
                       <div className="modal-box">
-                        <Link to={`/expériences/list/${cvData.id}`}>
-                          <h3 className='text-xl font-semibold underline text-white w-full'>Créer une expérience :</h3>
-                        </Link>
+
                         <div className="modal-action flex flex-row justify-end ">
                           <form method="dialog">
                             <button className="bg-red-600 p-2 rounded-md w-full flex justify-center items-center">Close</button>
                           </form>
                         </div>
-
                         <ExperiencesCreateModale />
-
                       </div>
                     </dialog>
-
-
-
 
                     <div class='px-1 md:px-3'>
 

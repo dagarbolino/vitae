@@ -68,7 +68,7 @@ class CurriculumSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Curriculum
-        fields = ['id', 'title', 'user', 'active', 'created_at', 'updated_at', 'infos', 'hobbies', 'formations', 'experiences', 'skills', 'languages']
+        fields = ['id', 'title', 'user', 'created_at', 'updated_at', 'infos', 'hobbies', 'formations', 'experiences', 'skills', 'languages']
         
     
     infos = InfoSerializer(many=True, read_only=True)
@@ -82,7 +82,7 @@ class CurriculumCretateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Curriculum
-        fields = ['id', 'title', 'user', 'active', 'created_at', 'updated_at', 'infos', 'hobbies', 'formations', 'experiences', 'skills', 'languages']
+        fields = ['id', 'title', 'user', 'created_at', 'updated_at', 'infos', 'hobbies', 'formations', 'experiences', 'skills', 'languages']
 
     def create(self, validated_data):
         infos_data = validated_data.pop('infos', [])

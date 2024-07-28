@@ -22,11 +22,11 @@ const Home = () => {
 
         <div className='w-full flex flex-col justify-start items-start '>
 
-          <h1 className=' text-3xl font-semibold flex flex-row justify-center items-center w-full h-10'>
-            Welcome !
+          <h1 className=' text-2xl font-semibold flex flex-row justify-center items-center w-full h-10'>
+            Welcome 
           </h1>
-          <p className=' text-3xl  font-semibold flex flex-row justify-center items-center w-full h-10 mb-10'>
-            on the Vitae website !!
+          <p className=' text-2xl  font-semibold flex flex-row justify-center items-center w-full h-10 mb-10'>
+            on the CVGen website !!
           </p>
           {user ?
             <>
@@ -57,8 +57,8 @@ const Home = () => {
             </>
             :
             <>
-              <span className='text-4xl mb-16'>
-                You are not logged in
+              <span className='text-2xl mb-16'>
+                You are not logged in 
               </span>
               <br />
               <br />

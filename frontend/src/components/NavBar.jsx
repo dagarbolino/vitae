@@ -3,7 +3,7 @@ import { Link, NavLink, useNavigate } from 'react-router-dom'
 import AuthContext from "../context/AuthContext"
 
 function NavBar() {
-  const { logoutUser } = useContext(AuthContext)
+  const { logoutUser, user } = useContext(AuthContext) 
   const navigate = useNavigate()
   const [menuOpen, setMenuOpen] = useState(false)
 
@@ -35,9 +35,11 @@ function NavBar() {
           <NavLink to='/create-cv' className='bg-blue-500 text-white p-2 rounded-md m-2 w-auto hover:bg-blue-600 transition-colors duration-300 ease-in-out'>
             Created CV
           </NavLink>
-          <Link className='bg-red-500 text-white p-2 rounded-md mx-2 w-auto hover:bg-red-600 transition-colors duration-300 ease-in-out' onClick={handleLogout}>
-            Logout
-          </Link>
+          {user && (
+            <Link className='bg-red-500 text-white p-2 rounded-md mx-2 w-auto hover:bg-red-600 transition-colors duration-300 ease-in-out' onClick={handleLogout}>
+              Logout
+            </Link>
+          )}
         </nav>
       </section>
     </>

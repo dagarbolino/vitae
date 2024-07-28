@@ -35,14 +35,12 @@ const UpdateCv = () => {
         setTitle(data.title);
         setIsActive(data.active);
         setUserId(data.user);
-
         setAllHobbies(hobbiesResponse.data);
         setAlldInfos(infosResponse.data);
         setAllSkills(skillsResponse.data);
         setAllLanguages(languagesResponse.data);
         setAllFormations(formationsResponse.data);
         setAllExperiences(experiencesResponse.data);
-
       } catch (error) {
         console.error("Erreur lors de la récupération des données du curriculum", error);
       }
@@ -114,7 +112,6 @@ const UpdateCv = () => {
           />
         </div>
 
-
         {/* Champ User ID */}
         <div className='mb-4'>
           <label htmlFor='userId' className='block text-sm font-medium text-gray-700'>ID de l'utilisateur</label>
@@ -127,7 +124,6 @@ const UpdateCv = () => {
             className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
           />
         </div>
-
 
         {/* Champ Infos perso */}
         <CheckboxGroupComponent
@@ -182,7 +178,6 @@ const UpdateCv = () => {
           setSelectedItems={setSelectedExperiences}
           itemLabelKey="title_experience"
         />
-
 
         {/* Bouton de soumission */}
         <button type='submit' className='mt-4 px-4 py-2 bg-blue-500 text-white rounded'>

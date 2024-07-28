@@ -16,7 +16,6 @@ const InfoCreateModale = () => {
   const [email, setEmail] = useState('');
   const [photo, setPhoto] = useState(null);
   const [motivation, setMotivation] = useState('');
-  const [active, setActive] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -35,9 +34,8 @@ const InfoCreateModale = () => {
     formData.append('email', email);
     if (photo) formData.append('photo', photo);
     formData.append('motivation', motivation);
-    formData.append('active', active);
 
-    axios.post('http://localhost:8000/info/', formData, {
+    axios.post('http://localhost:8000/curriculum/info/', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
